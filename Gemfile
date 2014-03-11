@@ -17,5 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'dotenv'
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
