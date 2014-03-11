@@ -6,5 +6,8 @@
     = javascript_include_tag 'application', media: 'all'
     = csrf_meta_tags
   %body
-    = yield
+    = render 'shared/header'
+
+    .container
+      = yield
 
