@@ -1,4 +1,5 @@
 class Api::V1::PullsController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @pull_requests = get_pull_requests
