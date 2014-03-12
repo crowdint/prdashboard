@@ -1,5 +1,12 @@
 Prdashboard::Application.routes.draw do
+
   root to: 'welcome#index'
+
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      resources :pulls,  only: [:index]
+    end
+  end
 
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy', as: :signout
