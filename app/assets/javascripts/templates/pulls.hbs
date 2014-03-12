@@ -12,42 +12,46 @@
 
 <div class='row'>
   <div class='col-lg-12'>
-    <table id='pulls-table' class='table table-striped'>
-      <thead>
-        <th>Author</th>
-        <th>Title</th>
-        <th>Repo</th>
-        <th>Comments</th>
-        <th>Created At</th>
-      </thead>
-      <tbody>
-        {{#each}}
-          <tr>
-            <td>
-              <a {{bind-attr href='user.url'}}>
-                <img {{bind-attr src='user.avatar' alt='user.nickname'}} class='img-circle' height='80px' width='80px' />
-              </a>
-            </td>
-            <td>
-              <a {{bind-attr href='url'}}>{{title}}</a>
-            </td>
-            <td>
-              <a {{bind-attr href='repository.url'}}>{{repository.full_name}}</a>
-            </td>
-            <td>
-              {{comments_count}}
-            </td>
-            <td>
-              {{friendlyDate created_at}}
-            </td>
-          </tr>
-        {{else}}
-          <tr>
-            <td class='center' colspan='5'>No Pull Requests to show.</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    {{#if isLoading}}
+      Loading...
+    {{else}}
+      <table id='pulls-table' class='table table-striped'>
+        <thead>
+          <th>Author</th>
+          <th>Title</th>
+          <th>Repo</th>
+          <th>Comments</th>
+          <th>Created At</th>
+        </thead>
+        <tbody>
+          {{#each}}
+            <tr>
+              <td>
+                <a {{bind-attr href='user.url'}}>
+                  <img {{bind-attr src='user.avatar' alt='user.nickname'}} class='img-circle' height='80px' width='80px' />
+                </a>
+              </td>
+              <td>
+                <a {{bind-attr href='url'}}>{{title}}</a>
+              </td>
+              <td>
+                <a {{bind-attr href='repository.url'}}>{{repository.full_name}}</a>
+              </td>
+              <td>
+                {{comments_count}}
+              </td>
+              <td>
+                {{friendlyDate created_at}}
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td class='center' colspan='5'>No Pull Requests to show.</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
   </div>
 </div>
 
