@@ -1,0 +1,39 @@
+<div class='row'>
+  <h3>Opened Pull Requests</h3>
+</div>
+
+<div class='row'>
+  <table class='table table-striped'>
+    <thead>
+      <th>Title</th>
+      <th>Repo</th>
+      <th>Author</th>
+      <th>Comments</th>
+      <th>Created At</th>
+    </thead>
+    <tbody>
+      {{#each}}
+        <tr>
+          <td>
+            <a {{bind-attr href='url'}}>{{title}}</a>
+          </td>
+          <td>
+            <a {{bind-attr href='repository.url'}}>{{repository.full_name}}</a>
+          </td>
+          <td>
+            <a {{bind-attr href='user.url'}}>
+              <img {{bind-attr src='user.avatar' alt='user.nickname'}} height='80px' width='80px' />
+            </a>
+          </td>
+          <td>
+            {{comments_count}}
+          </td>
+          <td>
+            {{created_at}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
