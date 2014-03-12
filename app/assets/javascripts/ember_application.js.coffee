@@ -1,6 +1,7 @@
 #= require handlebars
 #= require ember
 #= require ember-data
+#= require moment
 #= require_self
 #= require prdashboard
 
