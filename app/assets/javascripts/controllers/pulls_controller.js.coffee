@@ -7,6 +7,11 @@ PRDashboard.PullsController = Em.ArrayController.extend
   ).property()
 
   orgDidChange: (->
-
+    @getPullRequests()
   ).observes('org')
+
+  getPullRequests: ->
+    @store.find('pull', organization: @get('org')).then ((pulls) ->
+      @set('content', pulls)
+    ).bind(@)
 
