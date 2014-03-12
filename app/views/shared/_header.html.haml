@@ -1,0 +1,12 @@
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %a.navbar-brand{href: "../"} PR Dashboard
+    #navbar-main.navbar-collapse.collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          - if current_user
+            = link_to 'Logout', signout_path
+          - else
+            = link_to 'Login', '/auth/github'
+
