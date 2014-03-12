@@ -18,5 +18,18 @@ class GithubService
     pull_requests
   end
 
+  def get_organizations
+    orgs = []
+    organizations = github.orgs.list
+
+    organizations.each_page do |page|
+      page.each do |org|
+        orgs << Organization.new(org)
+      end
+    end
+
+    orgs
+  end
+
 end
 
