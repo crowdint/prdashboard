@@ -91,6 +91,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
+    oj (2.5.5)
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
@@ -110,6 +111,8 @@ GEM
       slop (~> 3.4)
     puma (2.8.1)
       rack (>= 1.1, < 2.0)
+    rabl (0.9.3)
+      activesupport (>= 2.3.14)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -178,10 +181,12 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
+  oj
   omniauth-github
   pg
   pry
   puma
+  rabl
   rails (= 4.0.2)
   rspec-rails
   sass-rails (~> 4.0.0)
