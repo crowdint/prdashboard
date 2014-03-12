@@ -1,4 +1,4 @@
 PRDashboard.PullsRoute = Em.Route.extend
   model: ->
-    @store.findAll('pull')
+    @store.find('pull', organization: @controllerFor('pulls').get('org'))
 

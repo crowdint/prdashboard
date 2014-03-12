@@ -5,7 +5,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
 
   currentOrg: (->
     @get 'orgs.firstObject.name'
-  ).property()
+  ).property('orgs.@each')
 
   orgDidChange: (->
     @getPullRequests()
