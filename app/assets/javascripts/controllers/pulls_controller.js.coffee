@@ -58,6 +58,9 @@ PRDashboard.PullsController = Em.ArrayController.extend
     $('pre').css('height', $(window).height() - 280)
     $('.modal-body').css('height', $(window).height() - 250)
 
+  closeModal: ->
+    $('#diffs-modal').modal('hide')
+
   filterBy: (filter) ->
     @set('filter', filter)
     @set('content', @get('all')) if filter is 'all'
@@ -83,5 +86,18 @@ PRDashboard.PullsController = Em.ArrayController.extend
         success: ((response) ->
           @prepareDiff(response)
         ).bind(@)
+
+    commentPR: (pull, text) ->
+      $.ajax
+        type: 'POST'
+        url: '/api/v1/comments'
+        data:
+          repo: pull.get('repository.full_name')
+          pull: pull.get('number')
+          text: text
+        success: (->
+          @closeModal()
+        ).bind(@)
+
 
 

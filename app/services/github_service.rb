@@ -43,6 +43,13 @@ class GithubService
     end
   end
 
+  def create_pull_comment(params)
+    user = params[:repo].split('/').first
+    repo = params[:repo].split('/').last
+
+    github.issues.comments.create user, repo, params[:pull], body: params[:text]
+  end
+
   private
 
   def repos_for(organization)

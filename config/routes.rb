@@ -7,6 +7,7 @@ Prdashboard::Application.routes.draw do
       resources :pulls,         only: [:index]
       resources :organizations, only: [:index]
       resources :diffs,         only: [:show]
+      resources :comments,      only: [:create]
     end
   end
 
