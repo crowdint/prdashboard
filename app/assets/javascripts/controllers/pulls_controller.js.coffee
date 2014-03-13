@@ -38,7 +38,12 @@ PRDashboard.PullsController = Em.ArrayController.extend
         hljs.highlightBlock(e)
 
   showDiffModal: ->
+    @resizeModal()
     $('#diffs-modal').modal('show')
+
+  resizeModal: ->
+    $('pre').css('height', $(window).height() - 280)
+    $('.modal-body').css('height', $(window).height() - 250)
 
   actions:
     applyFilter: (filter) ->
