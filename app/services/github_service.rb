@@ -1,7 +1,8 @@
 class GithubService
-  attr_accessor :github
+  attr_accessor :github, :token
 
   def initialize(token)
+    @token = token
     @github = Github.new oauth_token: token
   end
 
@@ -29,6 +30,10 @@ class GithubService
     end
 
     orgs
+  end
+
+  def get_diff(params)
+    `curl -H "Authorization: token #{token}" -H "Accept: application/vnd.github.v3.diff" https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff`
   end
 
 end
