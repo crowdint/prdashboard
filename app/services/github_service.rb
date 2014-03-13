@@ -8,16 +8,19 @@ class GithubService
 
   def get_pull_requests(organization)
     Rails.cache.fetch("#{cache_key}/#{organization}/pulls", expires_in: 5.minutes) do
-      pull_requests = []
-      issues = github.issues.list org: organization, filter: 'all'
+      pulls = []
 
-      issues.each_page do |page|
-        page.each do |issue|
-          pull_requests << PullRequest.new(issue) if issue['pull_request']
+      repos_for(organization).each do |repo|
+        if repo.issues_count > 0
+          pull_requests = github.pull_requests.list(user: organization, repo: repo.name, auto_pagination: true)
+
+          pull_requests.each do |pull|
+            pulls << PullRequest.new(pull)
+          end
         end
       end
 
-      pull_requests
+      pulls
     end
   end
 
@@ -41,6 +44,16 @@ class GithubService
   end
 
   private
+
+  def repos_for(organization)
+    repos = []
+
+    github.repos.list(org: organization, auto_pagination: true).each do |repo|
+      repos << OpenStruct.new(name: repo['name'], issues_count: repo['open_issues_count'])
+    end
+
+    repos
+  end
 
   def cache_key
     Digest::MD5.hexdigest("#{@token}")

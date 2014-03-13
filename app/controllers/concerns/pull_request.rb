@@ -7,10 +7,10 @@ class PullRequest
     @url            = params[:html_url]
     @user           = GithubUser.new(params[:user])
     @created_at     = params[:created_at]
-    @repository     = Repository.new(params[:repository])
+    @repository     = Repository.new(params[:base][:repo])
     @comments_count = params[:comments]
     @number         = params[:number]
-    @is_private     = params[:repository][:private]
+    @is_private     = params[:base][:repo][:private]
   end
 
 end
