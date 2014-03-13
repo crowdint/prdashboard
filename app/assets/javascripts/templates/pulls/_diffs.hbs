@@ -1,0 +1,35 @@
+<div id='diffs-modal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='diffsModal' aria-hidden='true'>
+  <div class='modal-dialog modal-lg'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+        <div class='row'>
+          <div class='col-lg-1'>
+            <a {{bind-attr href='currentPR.user.url'}} target='_blank'>
+              <img {{bind-attr src='currentPR.user.avatar' alt='currentPR.user.nickname'}} class='img-circle' height='60px' width='60px' />
+            </a>
+          </div>
+          <div class='col-lg-11'>
+            <h4 class='modal-title'><a {{bind-attr href='currentPR.url'}} target='_blank'>{{currentPR.title}}</a></h4>
+          </div>
+        </div>
+      </div>
+      <div class='modal-body'>
+        <div class='row'>
+          <div class='col-lg-12'>
+            <pre>
+              <code id='diff-code'>
+                {{currentDiff}}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </div>
+      <div class='modal-footer'>
+        <a {{bind-attr href='currentPR.files_url'}} class='btn btn-primary' target='_blank'>Go to files</a>
+        <button type='button' class='btn btn-success'>LGTM</button>
+      </div>
+    </div>
+  </div>
+</div>
+
