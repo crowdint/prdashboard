@@ -1,16 +1,16 @@
 <div class='pull-right'>
   <div class='btn-group' data-toggle='buttons'>
-    <label class='btn btn-primary active' {{action 'applyFilter' 'all'}}>
-      <input type='radio'>
-      <span class='glyphicon glyphicon-asterisk'></span> All
-    </label>
-    <label class='btn btn-primary' {{action 'applyFilter' 'private'}}>
+    <label class='btn btn-primary active' {{action 'applyFilter' 'private'}}>
       <input type='radio'>
       <span class='glyphicon glyphicon-lock'></span> Private
     </label>
     <label class='btn btn-primary' {{action 'applyFilter' 'public'}}>
       <input type='radio'>
       <span class='glyphicon glyphicon-user'></span> Public
+    </label>
+    <label class='btn btn-primary' {{action 'applyFilter' 'all'}}>
+      <input type='radio'>
+      <span class='glyphicon glyphicon-asterisk'></span> All
     </label>
   </div>
 </div>
