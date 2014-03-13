@@ -1,5 +1,5 @@
 class PullRequest
-  attr_accessor :id, :title, :url, :user, :created_at, :repository, :comments_count
+  attr_accessor :id, :title, :url, :user, :created_at, :repository, :comments_count, :number
 
   def initialize(params)
     @id             = params[:id]
@@ -9,6 +9,7 @@ class PullRequest
     @created_at     = params[:created_at]
     @repository     = Repository.new(params[:repository])
     @comments_count = params[:comments]
+    @number         = params[:number]
   end
 
 end
