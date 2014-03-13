@@ -1,4 +1,5 @@
 PRDashboard.PullsController = Em.ArrayController.extend
+  sortProperties: ['created_at']
   all: Em.computed.alias('allPulls')
   orgs: []
   org: Em.computed.alias('currentOrg')
@@ -28,5 +29,8 @@ PRDashboard.PullsController = Em.ArrayController.extend
       @set('content', @get('all')) if filter is 'all'
       @set('content', @get('all').filterBy('repository.private')) if filter is 'private'
       @set('content', @get('all').filterBy('repository.private', false)) if filter is 'public'
+
+    sort: ->
+      @set('sortAscending', !@get('sortAscending'))
 
 
