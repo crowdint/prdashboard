@@ -23,3 +23,10 @@ PRDashboard.PullsController = Em.ArrayController.extend
       @set('isLoading', false)
     ).bind(@)
 
+  actions:
+    applyFilter: (filter) ->
+      @set('content', @get('all')) if filter is 'all'
+      @set('content', @get('all').filterBy('repository.private')) if filter is 'private'
+      @set('content', @get('all').filterBy('repository.private', false)) if filter is 'public'
+
+
