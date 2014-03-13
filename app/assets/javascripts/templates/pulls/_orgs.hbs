@@ -1,4 +1,11 @@
-<div class='col-lg-4'>
-  {{view Em.Select content=orgs valueBinding='org' optionValuePath='content.name' optionLabelPath='content.name' class='form-control'}}
+<div id='orgs' class='col-lg-5 pull-left'>
+  <div class='row'>
+    <div class='col-lg-3'>
+      <label>Organization:</label>
+    </div>
+    <div class='col-lg-5'>
+      {{view Em.Select content=orgs valueBinding='org' optionValuePath='content.name' optionLabelPath='content.name' class='form-control'}}
+    </div>
+  </div>
 </div>
 
