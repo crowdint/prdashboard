@@ -1,32 +1,4 @@
 <div class='row'>
-  <div class='col-lg-4'>
-    {{view Em.Select content=orgs valueBinding='org' optionValuePath='content.name' optionLabelPath='content.name' class='form-control'}}
-  </div>
-  <div class='col-lg-4 col-lg-offset-1'>
-    <div class='btn-group' data-toggle='buttons'>
-      <label class='btn btn-primary active' {{action 'applyFilter' 'all'}}>
-        <input type='radio'>
-        <span class='glyphicon glyphicon-asterisk'></span> All
-      </label>
-      <label class='btn btn-primary' {{action 'applyFilter' 'private'}}>
-        <input type='radio'>
-        <span class='glyphicon glyphicon-lock'></span> Private
-      </label>
-      <label class='btn btn-primary' {{action 'applyFilter' 'public'}}>
-        <input type='radio'>
-        <span class='glyphicon glyphicon-user'></span> Public
-      </label>
-    </div>
-  </div>
-</div>
-
-<div class='row'>
-  <div class='col-lg-12'>
-    <h3>Opened Pull Requests</h3>
-  </div>
-</div>
-
-<div class='row'>
   <div class='col-lg-12'>
     {{#if isLoading}}
       Loading...
