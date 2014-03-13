@@ -10,10 +10,11 @@
           <th>Repo</th>
           <th>Comments</th>
           <th><a href='#' {{action 'sort'}}>Created At</a></th>
+          <th>Actions</th>
         </thead>
         <tbody>
           {{#each}}
-            <tr>
+          <tr>
               <td>
                 <a {{bind-attr href='user.url'}} target='_blank'>
                   <img {{bind-attr src='user.avatar' alt='user.nickname'}} class='img-circle' height='80px' width='80px' />
@@ -30,6 +31,9 @@
               </td>
               <td>
                 {{friendlyDate created_at}}
+              </td>
+              <td>
+                <button class='btn btn-info' {{action 'showDiff' this}}><span class='glyphicon glyphicon-eye-open'></span> Review</button>
               </td>
             </tr>
           {{else}}

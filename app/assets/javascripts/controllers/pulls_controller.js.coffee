@@ -4,6 +4,8 @@ PRDashboard.PullsController = Em.ArrayController.extend
   orgs: []
   org: Em.computed.alias('currentOrg')
   isLoading: false
+  currentDiff: ''
+  currentPR: null
 
   currentOrg: (->
     @get 'orgs.firstObject.name'
@@ -24,6 +26,20 @@ PRDashboard.PullsController = Em.ArrayController.extend
       @set('isLoading', false)
     ).bind(@)
 
+  prepareDiff: (diff) ->
+    @set('currentDiff', diff)
+    @setDiffModalCallbacks()
+    @showDiffModal()
+
+  setDiffModalCallbacks: ->
+    $('#diffs-modal').on 'shown.bs.modal', ->
+      hljs.configure({tabReplace: '  '})
+      $('pre code').each (i, e) ->
+        hljs.highlightBlock(e)
+
+  showDiffModal: ->
+    $('#diffs-modal').modal('show')
+
   actions:
     applyFilter: (filter) ->
       @set('content', @get('all')) if filter is 'all'
@@ -32,5 +48,18 @@ PRDashboard.PullsController = Em.ArrayController.extend
 
     sort: ->
       @set('sortAscending', !@get('sortAscending'))
+
+    showDiff: (pull) ->
+      @set('currentPR', pull)
+
+      $.ajax
+        type: 'GET'
+        url: "api/v1/diffs/#{pull.get('number')}"
+        dataType: 'text'
+        data:
+          repo: pull.get('repository.full_name')
+        success: ((response) ->
+          @prepareDiff(response)
+        ).bind(@)
 
 
