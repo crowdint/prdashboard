@@ -6,6 +6,7 @@ Prdashboard::Application.routes.draw do
     namespace :v1 do
       resources :pulls,         only: [:index]
       resources :organizations, only: [:index]
+      resources :diffs,         only: [:show]
     end
   end
 
