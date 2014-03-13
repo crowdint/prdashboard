@@ -47,7 +47,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
       @set('content', @get('all').filterBy('repository.private', false)) if filter is 'public'
 
     sort: ->
-      @set('sortAscending', !@get('sortAscending'))
+      toggleProperty('sortAscending')
 
     showDiff: (pull) ->
       @set('currentPR', pull)
