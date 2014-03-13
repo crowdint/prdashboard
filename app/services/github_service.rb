@@ -7,7 +7,7 @@ class GithubService
   end
 
   def get_pull_requests(organization)
-    Rails.cache.fetch('#{cache_key(organization)}/pulls', expires_in: 5.minutes) do
+    Rails.cache.fetch("#{cache_key}/#{organization}/pulls", expires_in: 5.minutes) do
       pull_requests = []
       issues = github.issues.list org: organization, filter: 'all'
 
@@ -42,8 +42,8 @@ class GithubService
 
   private
 
-  def cache_key(organization = nil)
-    Digest::MD5.hexdigest("#{@token}#{organization}")
+  def cache_key
+    Digest::MD5.hexdigest("#{@token}")
   end
 
 end
