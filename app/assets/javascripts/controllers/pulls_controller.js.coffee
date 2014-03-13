@@ -8,6 +8,20 @@ PRDashboard.PullsController = Em.ArrayController.extend
   currentPR: null
   filter: 'private'
 
+  privateCount: (->
+    @get('all').filterBy('is_private').length
+  ).property('all.@each')
+
+
+  publicCount: (->
+    @get('all').filterBy('is_private', false).length
+  ).property('all.@each')
+
+
+  allCount: (->
+    @get('all.length')
+  ).property('all.@each')
+
   currentOrg: (->
     @get 'orgs.firstObject.name'
   ).property('orgs.@each')
