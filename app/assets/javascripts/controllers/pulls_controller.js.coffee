@@ -1,19 +1,30 @@
 PRDashboard.PullsController = Em.ArrayController.extend
   sortProperties: ['created_at']
-  all: Em.computed.alias('allPulls')
+  all: []
   orgs: []
   org: Em.computed.alias('currentOrg')
   isLoading: false
   currentDiff: ''
   currentPR: null
+  filter: 'private'
+
+  privateCount: (->
+    @get('all').filterBy('is_private').length
+  ).property('all.@each')
+
+
+  publicCount: (->
+    @get('all').filterBy('is_private', false).length
+  ).property('all.@each')
+
+
+  allCount: (->
+    @get('all.length')
+  ).property('all.@each')
 
   currentOrg: (->
     @get 'orgs.firstObject.name'
   ).property('orgs.@each')
-
-  allPulls: (->
-    @get 'content'
-  ).property()
 
   orgDidChange: (->
     @getPullRequests()
@@ -23,6 +34,8 @@ PRDashboard.PullsController = Em.ArrayController.extend
     @set('isLoading', true)
     @store.find('pull', organization: @get('org')).then ((pulls) ->
       @set('content', pulls)
+      @set('all', pulls)
+      @filterBy(@get('filter'))
       @set('isLoading', false)
     ).bind(@)
 
@@ -38,13 +51,25 @@ PRDashboard.PullsController = Em.ArrayController.extend
         hljs.highlightBlock(e)
 
   showDiffModal: ->
+    @resizeModal()
     $('#diffs-modal').modal('show')
+
+  resizeModal: ->
+    $('pre').css('height', $(window).height() - 280)
+    $('.modal-body').css('height', $(window).height() - 250)
+
+  closeModal: ->
+    $('#diffs-modal').modal('hide')
+
+  filterBy: (filter) ->
+    @set('filter', filter)
+    @set('content', @get('all')) if filter is 'all'
+    @set('content', @get('all').filterBy('is_private')) if filter is 'private'
+    @set('content', @get('all').filterBy('is_private', false)) if filter is 'public'
 
   actions:
     applyFilter: (filter) ->
-      @set('content', @get('all')) if filter is 'all'
-      @set('content', @get('all').filterBy('repository.private')) if filter is 'private'
-      @set('content', @get('all').filterBy('repository.private', false)) if filter is 'public'
+      @filterBy(filter)
 
     sort: ->
       toggleProperty('sortAscending')
@@ -61,5 +86,18 @@ PRDashboard.PullsController = Em.ArrayController.extend
         success: ((response) ->
           @prepareDiff(response)
         ).bind(@)
+
+    commentPR: (pull, text) ->
+      $.ajax
+        type: 'POST'
+        url: '/api/v1/comments'
+        data:
+          repo: pull.get('repository.full_name')
+          pull: pull.get('number')
+          text: text
+        success: (->
+          @closeModal()
+        ).bind(@)
+
 
 

@@ -26,8 +26,8 @@
         </div>
       </div>
       <div class='modal-footer'>
-        <a {{bind-attr href='currentPR.files_url'}} class='btn btn-primary' target='_blank'>Go to files</a>
-        <button type='button' class='btn btn-success'>LGTM</button>
+        <a {{bind-attr href='currentPR.files_url'}} class='btn btn-primary' target='_blank'><span class='glyphicon glyphicon-file'></span> Go to files</a>
+        <button type='button' class='btn btn-success' {{action 'commentPR' currentPR 'LGTM :shipit:'}}><span class='glyphicon glyphicon-thumbs-up'></span> LGTM</button>
       </div>
     </div>
   </div>

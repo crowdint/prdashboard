@@ -8,7 +8,6 @@
           <th>Author</th>
           <th>Title</th>
           <th>Repo</th>
-          <th>Comments</th>
           <th><a href='#' {{action 'sort'}}>Created At</a></th>
           <th>Actions</th>
         </thead>
@@ -25,9 +24,6 @@
               </td>
               <td>
                 <a {{bind-attr href='repository.url'}} target='_blank'>{{repository.full_name}}</a>
-              </td>
-              <td>
-                {{comments_count}}
               </td>
               <td>
                 {{friendlyDate created_at}}

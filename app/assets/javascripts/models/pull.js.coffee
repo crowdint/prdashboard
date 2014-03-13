@@ -4,6 +4,7 @@ PRDashboard.Pull = DS.Model.extend
   created_at:     DS.attr('date')
   comments_count: DS.attr('number')
   number:         DS.attr('string')
+  is_private:     DS.attr('boolean')
   user:           DS.belongsTo('user', { async: true })
   repository:     DS.belongsTo('repository', { async: true })
 
