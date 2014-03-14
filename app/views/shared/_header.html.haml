@@ -1,12 +1,14 @@
 .navbar.navbar-default.navbar-fixed-top
   .container
-    .navbar-header
-      %a.navbar-brand{href: "../"} PR Dashboard
-    #navbar-main.navbar-collapse.collapse
-      %ul.nav.navbar-nav.navbar-right
-        - if current_user
-          %li= link_to 'Dashboard', dashboard_path
-          %li= link_to 'Logout', signout_path
-        - else
-          %li= link_to 'Login', '/auth/github'
+    .col-lg-2.col-xs-5
+      .navbar-header
+        %a.navbar-brand{href: "../"} PR Dashboard
+    .col-lg-10.col-xs-7
+      #navbar-main
+        %ul.nav.navbar-right.navbar-custom
+          - if current_user
+            %li= link_to 'Dashboard', dashboard_path
+            %li= link_to 'Logout', signout_path
+          - else
+            %li= link_to 'Login', '/auth/github'
 
