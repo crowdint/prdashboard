@@ -2,15 +2,15 @@
   <div class='btn-group pull-right' data-toggle='buttons'>
     <label class='btn btn-primary active' {{action 'applyFilter' 'private'}}>
       <input type='radio'>
-      <span class='glyphicon glyphicon-lock'></span> Private ({{privateCount}})
+      <span class='glyphicon glyphicon-lock'></span> Private <span class='hidden-xs'>({{privateCount}})</span>
     </label>
     <label class='btn btn-primary' {{action 'applyFilter' 'public'}}>
       <input type='radio'>
-      <span class='glyphicon glyphicon-user'></span> Public ({{publicCount}})
+      <span class='glyphicon glyphicon-globe'></span> Public <span class='hidden-xs'>({{publicCount}})</span>
     </label>
     <label class='btn btn-primary' {{action 'applyFilter' 'all'}}>
       <input type='radio'>
-      <span class='glyphicon glyphicon-asterisk'></span> All ({{allCount}})
+      <span class='glyphicon glyphicon-asterisk'></span> All <span class='hidden-xs'>({{allCount}})</span>
     </label>
   </div>
 </div>
