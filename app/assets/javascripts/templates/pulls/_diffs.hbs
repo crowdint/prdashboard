@@ -16,12 +16,30 @@
       </div>
       <div class='modal-body'>
         <div class='row'>
-          <div class='col-lg-12'>
+          <div class='col-lg-8'>
             <pre>
               <code id='diff-code'>
                 {{currentDiff}}
               </code>
             </pre>
+          </div>
+          <div id='pr-comments' class='col-lg-4'>
+            {{#each comment in currentPR.comments}}
+            <div class='row comment well well-sm'>
+              <div class='col-lg-2'>
+                <a {{bind-attr href='comment.user_url'}} target='_blank'>
+                  <img {{bind-attr src='comment.avatar' alt='comment.username'}} class='img-circle' height='40px' width='40px' />
+                </a>
+              </div>
+              <div class='col-lg-10'>
+                <p>
+                  {{comment.body}}
+                  <em>&horbar; by</em>
+                  <a {{bind-attr href='comment.user_url'}} target='_blank'>{{comment.username}}</a>
+                </p>
+              </div>
+            </div>
+            {{/each}}
           </div>
         </div>
       </div>

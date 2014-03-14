@@ -44,10 +44,22 @@ class GithubService
   end
 
   def create_pull_comment(params)
-    user = params[:repo].split('/').first
-    repo = params[:repo].split('/').last
+    user, repo = get_user_repo(params)
 
     github.issues.comments.create user, repo, params[:pull], body: params[:text]
+  end
+
+  def get_pull_comments(params)
+    comments_list = []
+    user, repo = get_user_repo(params)
+
+    comments = github.issues.comments.list(user, repo, issue_id: params[:pull], auto_pagination: true)
+
+    comments.each do |comment|
+      comments_list << Comment.new(comment)
+    end
+
+    comments_list
   end
 
   private
@@ -64,6 +76,11 @@ class GithubService
 
   def cache_key
     Digest::MD5.hexdigest("#{@token}")
+  end
+
+  def get_user_repo(params)
+    info = params[:repo].split('/')
+    [ info.first, info.last ]
   end
 
 end
