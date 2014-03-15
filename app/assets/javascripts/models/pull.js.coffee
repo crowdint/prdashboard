@@ -7,6 +7,7 @@ PRDashboard.Pull = DS.Model.extend
   is_private:     DS.attr('boolean')
   user:           DS.belongsTo('user', { async: true })
   repository:     DS.belongsTo('repository', { async: true })
+  comments:       DS.hasMany('comment')
 
   files_url: (->
     @get('url') + '/files'

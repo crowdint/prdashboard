@@ -67,12 +67,20 @@ PRDashboard.PullsController = Em.ArrayController.extend
     @set('content', @get('all').filterBy('is_private')) if filter is 'private'
     @set('content', @get('all').filterBy('is_private', false)) if filter is 'public'
 
+  loadComments: ->
+    @store.find('comment', {
+      pull: @get('currentPR.number'),
+      repo: @get('currentPR.repository.full_name') 
+    }).then ((response) ->
+      @get('currentPR.comments').addObjects(response)
+    ).bind(@)
+
   actions:
     applyFilter: (filter) ->
       @filterBy(filter)
 
     sort: ->
-      toggleProperty('sortAscending')
+      @set('sortAscending', !@get('sortAscending'))
 
     showDiff: (pull) ->
       @set('currentPR', pull)
@@ -84,6 +92,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
         data:
           repo: pull.get('repository.full_name')
         success: ((response) ->
+          @loadComments()
           @prepareDiff(response)
         ).bind(@)
 
@@ -98,6 +107,5 @@ PRDashboard.PullsController = Em.ArrayController.extend
         success: (->
           @closeModal()
         ).bind(@)
-
 
 

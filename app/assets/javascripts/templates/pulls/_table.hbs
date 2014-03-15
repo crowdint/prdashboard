@@ -5,16 +5,16 @@
     {{else}}
       <table id='pulls-table' class='table table-striped'>
         <thead>
-          <th>Author</th>
+          <th class='hidden-xs'>Author</th>
           <th>Title</th>
-          <th>Repo</th>
+          <th class='hidden-xs'>Repo</th>
           <th><a href='#' {{action 'sort'}}>Created At</a></th>
           <th>Actions</th>
         </thead>
         <tbody>
           {{#each}}
           <tr>
-              <td>
+              <td class='hidden-xs'>
                 <a {{bind-attr href='user.url'}} target='_blank'>
                   <img {{bind-attr src='user.avatar' alt='user.nickname'}} class='img-circle' height='80px' width='80px' />
                 </a>
@@ -22,7 +22,7 @@
               <td>
                 <a {{bind-attr href='url'}} target='_blank'>{{title}}</a>
               </td>
-              <td>
+              <td class='hidden-xs'>
                 <a {{bind-attr href='repository.url'}} target='_blank'>{{repository.full_name}}</a>
               </td>
               <td>

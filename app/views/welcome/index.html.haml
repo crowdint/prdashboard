@@ -1,4 +1,70 @@
-.jumbotron
-  %h1 Welcome!
-  %p
-    %a.btn.btn-primary.btn-lg{ role: "button", href: '/auth/github' } Sign in with Github!
+.info-row
+  .col-lg-4.col-md-4.col-sm-6.col-xs-12.info-block
+    .thumbnail
+      .caption
+        %p.info-icon
+          %span.glyphicon.glyphicon-question-sign
+        %h3 What?
+        %p
+          It is a Dashboard that allows you to review all 
+          the open Pull Requests from your organizations and 
+          leave the classic "LGTM" comment.
+  .col-lg-4.col-md-4.col-sm-6.col-xs-12.info-block
+    .thumbnail
+      .caption
+        %p.info-icon
+          %span.glyphicon.glyphicon-time
+        %h3 Why?
+        %p
+          The process of reviewing Pull Requests demands time. 
+          If you could review a Pull Request, using only 2 clicks, 
+          the process will be faster, and remember, time is money!
+  .col-lg-4.col-md-4.col-sm-6.col-xs-12.info-block
+    .thumbnail
+      .caption
+        %p.info-icon
+          %span.glyphicon.glyphicon-star
+        %h3 Features
+        %p
+          %ul.list-unstyled
+            %li Filter by private or public repo.
+            %li Filter by organization.
+            %li Sort by Pull Request's submission date.
+            %li Review the Pull Request's diff.
+            %li Add LGTM comment with a simple click.
+            %li Read the comments.
+.info-row
+  .col-lg-4.col-md-4.col-sm-6.col-xs-12.info-block
+    .thumbnail
+      .caption
+        %p.info-icon
+          %span.glyphicon.glyphicon-globe
+        %h3 Open Source?
+        %p
+          Sure thing! Here at 
+          %a{ href: 'http://crowdint.com', target: '_blank' } Crowd Interactive
+          we love and support the community! If you have an idea, but you feel 
+          lost, please take a look at the 
+          %a{href: 'http://developer.github.com/v3/', target: '_blank'} Github's API 
+          , if it is possible, there should be the answer.
+  .col-lg-4.col-md-4.col-sm-6.col-xs-12.info-block
+    .thumbnail
+      .caption
+        %p.info-icon
+          %span.glyphicon.glyphicon-paperclip
+        %h3 Fork
+        %p
+          Feel free to fork the project and adjust it to 
+          your own needs.
+          Here is the 
+          %a{href: 'https://github.com/crowdint/prdashboard', target: '_blank'} repository.
+  .col-lg-4.col-md-4.col-sm-6.col-xs-12.info-block
+    .thumbnail
+      .caption
+        %p.info-icon
+          %span.glyphicon.glyphicon-user
+        %h3 Contribute
+        %p
+          Did you develop a killer feature? Found a nasty bug and fixed it? 
+          Share your code with us, send us a Pull Request.
+
