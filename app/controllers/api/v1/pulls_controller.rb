@@ -9,7 +9,18 @@ class Api::V1::PullsController < ApplicationController
     render 'api/v1/pulls/index'
   end
 
+  def update
+    GithubService.new(session[:user_token]).merge_pull_request merge_params, current_user
+    Rails.cache.clear
+
+    render json: { status: :ok }
+  end
+
   private
+
+  def merge_params
+    params.permit(:id, :repo)
+  end
 
   def get_pull_requests
     GithubService.new(session[:user_token]).get_pull_requests organization

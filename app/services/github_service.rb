@@ -62,6 +62,11 @@ class GithubService
     comments_list
   end
 
+  def merge_pull_request(params, current_user)
+    user, repo = get_user_repo(params)
+    github.pull_requests.merge user, repo, params[:id], commit_message: "Merged from PR Dashboard by #{current_user.nickname}"
+  end
+
   private
 
   def repos_for(organization)

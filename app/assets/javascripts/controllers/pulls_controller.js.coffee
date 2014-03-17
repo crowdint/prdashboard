@@ -75,6 +75,22 @@ PRDashboard.PullsController = Em.ArrayController.extend
       @get('currentPR.comments').addObjects(response)
     ).bind(@)
 
+  commentPR: (pull, text) ->
+    $.ajax
+      type: 'POST'
+      url: '/api/v1/comments'
+      data:
+        repo: pull.get('repository.full_name')
+        pull: pull.get('number')
+        text: text
+      success: (->
+        @closeModal()
+      ).bind(@)
+
+  removePull: (pull) ->
+    @get('content').removeObject(pull)
+    @get('all').removeObject(pull)
+
   actions:
     applyFilter: (filter) ->
       @filterBy(filter)
@@ -96,16 +112,17 @@ PRDashboard.PullsController = Em.ArrayController.extend
           @prepareDiff(response)
         ).bind(@)
 
-    commentPR: (pull, text) ->
+    lgtmPR: (pull, text) ->
+      @commentPR(pull, text) if confirm('Are you sure to mark as LGTM?')
+
+    mergePR: (pull) ->
       $.ajax
-        type: 'POST'
-        url: '/api/v1/comments'
+        type: 'PUT'
+        url: "/api/v1/pulls/#{pull.get('number')}"
         data:
           repo: pull.get('repository.full_name')
-          pull: pull.get('number')
-          text: text
-        success: (->
+        success: ((response) ->
+          @removePull(pull)
           @closeModal()
-        ).bind(@)
-
+        ).bind(@) if confirm('Are you sure? This cannot be undone')
 
