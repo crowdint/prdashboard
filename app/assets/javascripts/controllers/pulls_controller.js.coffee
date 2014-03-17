@@ -23,10 +23,11 @@ PRDashboard.PullsController = Em.ArrayController.extend
   ).property('all.@each')
 
   currentOrg: (->
-    @get 'orgs.firstObject.name'
+    localStorage.getItem('organization') || @get 'orgs.firstObject.name'
   ).property('orgs.@each')
 
   orgDidChange: (->
+    localStorage.setItem('organization', @get('org'))
     @getPullRequests()
   ).observes('org')
 
