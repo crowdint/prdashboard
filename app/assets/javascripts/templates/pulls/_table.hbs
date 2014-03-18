@@ -20,10 +20,10 @@
                 </a>
               </td>
               <td>
-                <a {{bind-attr href='url'}} target='_blank'>{{title}}</a>
+                <a {{bind-attr href='url'}} target='_blank' onClick='ga("send", "event", "pull_link", "click")'>{{title}}</a>
               </td>
               <td class='hidden-xs'>
-                <a {{bind-attr href='repository.url'}} target='_blank'>{{repository.full_name}}</a>
+                <a {{bind-attr href='repository.url'}} target='_blank' onClick='ga("send", "event", "repo_link", "click")'>{{repository.full_name}}</a>
               </td>
               <td>
                 {{friendlyDate created_at}}

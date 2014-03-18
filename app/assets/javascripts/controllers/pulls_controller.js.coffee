@@ -28,6 +28,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
 
   orgDidChange: (->
     localStorage.setItem('organization', @get('org'))
+    ga('send', 'event', 'organizations', 'change')
     @getPullRequests()
   ).observes('org')
 
@@ -94,13 +95,17 @@ PRDashboard.PullsController = Em.ArrayController.extend
 
   actions:
     applyFilter: (filter) ->
+      ga('send', 'event', 'pulls', 'filter', filter)
       @filterBy(filter)
 
     sort: ->
+      ga('send', 'event', 'pulls', 'sort', 'created_at')
       @set('sortAscending', !@get('sortAscending'))
+
 
     showDiff: (pull) ->
       @set('currentPR', pull)
+      ga('send', 'event', 'review', 'show')
 
       $.ajax
         type: 'GET'
@@ -115,8 +120,10 @@ PRDashboard.PullsController = Em.ArrayController.extend
 
     lgtmPR: (pull, text) ->
       @commentPR(pull, text) if confirm('Are you sure to mark as LGTM?')
+      ga('send', 'event', 'review', 'lgtm')
 
     mergePR: (pull) ->
+      ga('send', 'event', 'review', 'merge')
       $.ajax
         type: 'PUT'
         url: "/api/v1/pulls/#{pull.get('number')}"
