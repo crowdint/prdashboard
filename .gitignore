@@ -16,3 +16,9 @@
 /tmp
 .env
 /config/database.yml
+
+# Ignore coverage folder
+/coverage
+
+# Ignore other files
+.ruby-version
