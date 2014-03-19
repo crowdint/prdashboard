@@ -11,6 +11,8 @@ Prdashboard::Application.routes.draw do
     end
   end
 
+  resources :sessions, only: [:create, :destroy]
+
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy', as: :signout
   get '/dashboard', to: 'dashboard#index', as: :dashboard
