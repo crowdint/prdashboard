@@ -12,7 +12,7 @@ Dotenv.load
 module Prdashboard
   class Application < Rails::Application
     config.assets.precompile += %w(
-                                    ember_application.js,
+                                    ember_application.js
                                     analytics/analytics.js
                                   )
   end
