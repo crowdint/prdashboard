@@ -1,4 +1,4 @@
-class Api::V1::OrganizationsController < ApplicationController
+class Api::V1::OrganizationsController < Api::V1::ApplicationController
   before_filter :authenticate_user!
 
   def index

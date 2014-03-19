@@ -1,4 +1,4 @@
-class Api::V1::DiffsController < ApplicationController
+class Api::V1::DiffsController < Api::V1::ApplicationController
   before_filter :authenticate_user!
 
   def show
