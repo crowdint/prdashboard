@@ -129,8 +129,21 @@ PRDashboard.PullsController = Em.ArrayController.extend
         url: "/api/v1/pulls/#{pull.get('number')}"
         data:
           repo: pull.get('repository.full_name')
+          kind: 'merge'
         success: ((response) ->
           @removePull(pull)
           @closeModal()
         ).bind(@) if confirm('Are you sure? This cannot be undone')
 
+    closePR: (pull) ->
+      ga('send', 'event', 'review', 'close')
+      $.ajax
+        type: 'PUT'
+        url: "/api/v1/pulls/#{pull.get('number')}"
+        data:
+          repo: pull.get('repository.full_name')
+          kind: 'close'
+        success: ((response) ->
+          @removePull(pull)
+          @closeModal()
+        ).bind(@) if confirm('Are you sure? This cannot be undone')
