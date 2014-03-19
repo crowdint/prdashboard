@@ -58,6 +58,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
 
   resizeModal: ->
     $('pre').css('height', $(window).height() - 280)
+    $('#pr-comments').css('height', $(window).height() - 280)
     $('.modal-body').css('height', $(window).height() - 250)
 
   closeModal: ->
