@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     if session[:user_id]
       current_user
     else
-      redirect_to root_path unless session[:user_id]
+      redirect_to root_path
     end
   end
 
