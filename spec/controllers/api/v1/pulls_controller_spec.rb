@@ -107,15 +107,26 @@ describe Api::V1::PullsController do
 
   describe '#update' do
     before do
-      GithubService.any_instance.stub(:merge_pull_request)
       Rails.cache.should_receive(:clear)
-
       signin_user
     end
 
-    it 'should return ok status' do
-      patch :update, id: 1
-      expect(response.body).to match /ok/
+    context 'merging a PR' do
+      before { GithubService.any_instance.stub(:merge_pull_request) }
+
+      it 'should return ok status' do
+        patch :update, id: 1, kind: 'merge'
+        expect(response.body).to match /ok/
+      end
+    end
+
+    context 'closing a PR' do
+      before { GithubService.any_instance.stub(:close_pull_request) }
+
+      it 'should return ok status' do
+        patch :update, id: 1, kind: 'close'
+        expect(response.body).to match /ok/
+      end
     end
   end
 end

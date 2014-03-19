@@ -44,7 +44,8 @@
         </div>
       </div>
       <div class='modal-footer'>
-        <button type='button' class='btn btn-danger' {{action 'mergePR' currentPR}}><span class='glyphicon glyphicon-flash'></span> Merge</button>
+        <button type='button' class='btn btn-danger' {{action 'closePR' currentPR}}><span class='glyphicon glyphicon-trash'></span> Close PR</button>
+        <button type='button' class='btn btn-warning' {{action 'mergePR' currentPR}}><span class='glyphicon glyphicon-flash'></span> Merge</button>
         <button type='button' class='btn btn-success' {{action 'lgtmPR' currentPR 'LGTM :shipit:'}}><span class='glyphicon glyphicon-thumbs-up'></span> LGTM</button>
         <a {{bind-attr href='currentPR.files_url'}} class='btn btn-primary' target='_blank'><span class='glyphicon glyphicon-file'></span> Go to files</a>
       </div>

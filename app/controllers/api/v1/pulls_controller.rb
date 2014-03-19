@@ -7,13 +7,19 @@ class Api::V1::PullsController < Api::V1::ApplicationController
   end
 
   def update
-    GithubService.new(session[:user_token]).merge_pull_request merge_params, current_user
+    action = "#{action_param}_pull_request".to_sym
+    GithubService.new(session[:user_token]).send(action, merge_params, current_user)
+
     Rails.cache.clear
 
     render json: { status: :ok }
   end
 
   private
+
+  def action_param
+    params[:kind]
+  end
 
   def merge_params
     params.permit(:id, :repo)
