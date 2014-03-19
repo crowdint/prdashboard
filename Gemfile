@@ -22,6 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'dotenv'
+  gem 'json_spec'
   gem 'pry'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
