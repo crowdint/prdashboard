@@ -20,7 +20,10 @@ class GithubService
         end
       end
 
-      pulls
+      repositories = pulls.map(&:repository).uniq { |e| [e.id] }
+      users        = pulls.map(&:user).uniq { |e| [e.id] }
+
+      [pulls, repositories, users]
     end
   end
 

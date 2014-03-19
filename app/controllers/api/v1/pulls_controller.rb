@@ -1,11 +1,8 @@
-class Api::V1::PullsController < ApplicationController
+class Api::V1::PullsController < Api::V1::ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @pull_requests = get_pull_requests
-    @repositories  = @pull_requests.map(&:repository).uniq { |e| [e.id] }
-    @users         = @pull_requests.map(&:user).uniq { |e| [e.id] }
-
+    @pull_requests, @repositories, @users = get_pull_requests
     render 'api/v1/pulls/index'
   end
 
