@@ -70,6 +70,11 @@ class GithubService
     github.pull_requests.merge user, repo, params[:id], commit_message: "Merged from PR Dashboard by #{current_user.nickname}"
   end
 
+  def close_pull_request(params, current_user)
+    user, repo = get_user_repo(params)
+    github.pull_requests.update user, repo, params[:id], state: 'closed'
+  end
+
   private
 
   def repos_for(organization)
