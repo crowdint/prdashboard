@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe GithubService do
   let(:subject) do
-    GithubService.new('09348dsoij00')
+    GithubService.new('leusertoken123')
   end
 
   describe '#initialize' do
     it 'should set the token' do
-      expect(subject.token).to eql '09348dsoij00'
+      expect(subject.token).to eql 'leusertoken123'
     end
 
     it 'should create a github_api instance' do
@@ -18,7 +18,7 @@ describe GithubService do
   describe '#get_pull_requests' do
     let(:repos) do
       [
-        OpenStruct.new(name: 'crowdint', issues_count: 1)
+        OpenStruct.new(name: 'rails3-jquery-autocomplete', issues_count: 1)
       ]
     end
 
@@ -65,6 +65,48 @@ describe GithubService do
 
     it 'returns github users objects as the last position of array' do
       expect(subject.get_pull_requests('crowdint')[2].first).to be_a GithubUser
+    end
+  end
+
+  describe '#get_organizations' do
+    let(:body) do
+      [
+        {
+          id: 12345,
+          login: 'crowdint',
+          avatar_url: 'gravatar.com/avatar.png'
+        },
+        {
+          id: 98765,
+          login: 'magmaconf',
+          avatar_url: 'gravatar.com/avatar.png'
+        }
+      ]
+    end
+
+    let(:env) do
+      {
+        status: 200,
+        body: body,
+        response_headers: {
+          'Content-Type' => 'text/plain'
+        }
+      }
+    end
+
+    let(:res) { Faraday::Response.new env }
+    let(:orgs) { Github::ResponseWrapper.new res, nil }
+
+    before do
+      Github::Client.any_instance.stub_chain(:orgs, :list).and_return orgs
+    end
+
+    it 'returns an array with 2 objects' do
+      expect(subject.get_organizations.size).to eql 2
+    end
+
+    it 'returns Organization objects' do
+      expect(subject.get_organizations.first).to be_a Organization
     end
   end
 
