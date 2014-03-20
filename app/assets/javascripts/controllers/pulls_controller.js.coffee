@@ -7,6 +7,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
   currentDiff: ''
   currentPR: null
   filter: 'private'
+  newComment: null
 
   privateCount: (->
     @get('all').filterBy('is_private').length
@@ -149,3 +150,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
           @closeModal()
         ).bind(@)
 
+    newComment: (pull)->
+      @commentPR pull, @get('newComment')
+      ga('send', 'event', 'review', 'comment')
+      @set 'newComment', null

@@ -23,7 +23,7 @@
               </code>
             </pre>
           </div>
-          <div id='pr-comments' class='col-lg-3 col-md-4 col-sm-12 col-xs-12'>
+          <div id='pr-comments' class='col-lg-3 col-md-4 col-sm-12 col-xs-12 pull-right'>
             {{#each comment in currentPR.comments}}
             <div class='row comment well well-sm'>
               <div class='col-lg-2 hidden-xs hidden-sm'>
@@ -40,6 +40,14 @@
               </div>
             </div>
             {{/each}}
+            <div class='row comment well well-sm'>
+              <div id='new-comment' class='col-lg-9'>
+                {{textarea valueBinding=newComment}}
+              </div>
+              <div class='col-lg-3'>
+                <button type='button' class='btn btn-success'  {{action 'newComment' currentPR}}><span class='glyphicon glyphicon-comment'/></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
