@@ -58,7 +58,6 @@ class GithubService
 
   def create_pull_comment(params)
     user, repo = get_user_repo(params)
-
     github.issues.comments.create user, repo, params[:pull], body: params[:text]
   end
 
@@ -80,7 +79,7 @@ class GithubService
     github.pull_requests.merge user, repo, params[:id], commit_message: "Merged from PR Dashboard by #{current_user.nickname}"
   end
 
-  def close_pull_request(params, current_user)
+  def close_pull_request(params, _)
     user, repo = get_user_repo(params)
     github.pull_requests.update user, repo, params[:id], state: 'closed'
   end

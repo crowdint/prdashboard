@@ -5,6 +5,19 @@ describe GithubService do
     GithubService.new('leusertoken123')
   end
 
+  let(:pull_params) do
+    {
+      repo: 'crowdint/prdashboard',
+      id: 1,
+      pull: 33,
+      text: 'le comment'
+    }
+  end
+
+  let(:current_user) do
+    User.create nickname: 'efigarolam'
+  end
+
   describe '#initialize' do
     it 'should set the token' do
       expect(subject.token).to eql 'leusertoken123'
@@ -112,21 +125,78 @@ describe GithubService do
 
 
   describe '#get_diff' do
-    let(:params) do
-      {
-        repo: 'crowdint/prdashboard',
-        id: 1
-      }
-    end
-
     before do
       Net::HTTP.stub(:start).and_return OpenStruct.new(body: 'le diff')
     end
 
     it 'returns diff text for a given pull request' do
-      expect(subject.get_diff(params)).to eql 'le diff'
+      expect(subject.get_diff(pull_params)).to eql 'le diff'
     end
   end
 
+  describe '#create_pull_comment' do
+    before do
+      Github::Client.any_instance.stub_chain(:issues, :comments, :create).and_return true
+    end
+
+    it 'creates a comment for a pull request issue' do
+      expect(subject.create_pull_comment(pull_params)).to be_true
+    end
+  end
+
+  describe '#get_pull_comments' do
+    let(:comments) do
+      [
+        {
+          id: 1,
+          body: 'LGTM',
+          user: {
+            login: 'efigarolam',
+            avatar_url: 'mota.png'
+          }
+        },
+        {
+          id: 2,
+          body: 'LGTM',
+          user: {
+            login: 'ingedmundo',
+            avatar_url: 'ingedmundo.png'
+          }
+        }
+      ]
+    end
+
+    before do
+      Github::Client.any_instance.stub_chain(:issues, :comments, :list).and_return comments
+    end
+
+    it 'gets an array of 2 comments from a pull request' do
+      expect(subject.get_pull_comments(pull_params).size).to eql 2
+    end
+
+    it 'gets an array of Comments objects' do
+      expect(subject.get_pull_comments(pull_params).first).to be_a Comment
+    end
+  end
+
+  describe '#merge_pull_request' do
+    before do
+      Github::Client.any_instance.stub_chain(:pull_requests, :merge).and_return true
+    end
+
+    it 'creates a comment for a pull request issue' do
+      expect(subject.merge_pull_request(pull_params, current_user)).to be_true
+    end
+  end
+
+  describe '#close_pull_request' do
+    before do
+      Github::Client.any_instance.stub_chain(:pull_requests, :update).and_return true
+    end
+
+    it 'creates a comment for a pull request issue' do
+      expect(subject.close_pull_request(pull_params, current_user)).to be_true
+    end
+  end
 end
 
