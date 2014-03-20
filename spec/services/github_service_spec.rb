@@ -110,8 +110,22 @@ describe GithubService do
     end
   end
 
+
   describe '#get_diff' do
-    
+    let(:params) do
+      {
+        repo: 'crowdint/prdashboard',
+        id: 1
+      }
+    end
+
+    before do
+      Net::HTTP.stub(:start).and_return OpenStruct.new(body: 'le diff')
+    end
+
+    it 'returns diff text for a given pull request' do
+      expect(subject.get_diff(params)).to eql 'le diff'
+    end
   end
 
 end

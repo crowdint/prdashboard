@@ -1,5 +1,3 @@
-require 'net/http'
-
 class GithubService
   attr_accessor :github, :token
 
@@ -50,10 +48,8 @@ class GithubService
       req['Authorization'] = "token #{token}"
       req['Accept'] = "application/vnd.github.v3.diff"
 
-      res = nil
-
-      Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http|
-        res = http.request(req)
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http|
+        http.request(req)
       }
 
       res.body
