@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/crowdint/prdashboard/badge.png)](https://coveralls.io/r/crowdint/prdashboard)
+
 # PR Dashboard
 
 PR Dashboard is a pull requests reviewing tool build on top of a Rails
