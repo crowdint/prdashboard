@@ -37,7 +37,7 @@ class GithubService
       end
     end
 
-    orgs
+    orgs.sort_by { |org| org.name }
   end
 
   def get_diff(params)

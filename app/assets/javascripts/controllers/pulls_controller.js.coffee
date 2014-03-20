@@ -120,7 +120,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
         ).bind(@)
 
     lgtmPR: (pull, text) ->
-      @commentPR(pull, text) if confirm('Are you sure to mark as LGTM?')
+      @commentPR(pull, text)
       ga('send', 'event', 'review', 'lgtm')
 
     mergePR: (pull) ->
@@ -134,7 +134,7 @@ PRDashboard.PullsController = Em.ArrayController.extend
         success: ((response) ->
           @removePull(pull)
           @closeModal()
-        ).bind(@) if confirm('Are you sure? This cannot be undone')
+        ).bind(@)
 
     closePR: (pull) ->
       ga('send', 'event', 'review', 'close')
@@ -147,4 +147,5 @@ PRDashboard.PullsController = Em.ArrayController.extend
         success: ((response) ->
           @removePull(pull)
           @closeModal()
-        ).bind(@) if confirm('Are you sure? This cannot be undone')
+        ).bind(@)
+
