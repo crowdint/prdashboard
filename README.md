@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/crowdint/prdashboard.svg?branch=master)](https://travis-ci.org/crowdint/prdashboard)
-[![Coverage Status](https://coveralls.io/repos/crowdint/prdashboard/badge.png)](https://coveralls.io/r/crowdint/prdashboard)
+[![Coverage Status](https://coveralls.io/repos/crowdint/prdashboard/badge.png?branch=master)](https://coveralls.io/r/crowdint/prdashboard?branch=master)
 
 # PR Dashboard
 
