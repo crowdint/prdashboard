@@ -110,5 +110,9 @@ describe GithubService do
     end
   end
 
+  describe '#get_diff' do
+    
+  end
+
 end
 

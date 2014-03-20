@@ -1,3 +1,5 @@
+require 'net/http'
+
 class GithubService
   attr_accessor :github, :token
 
@@ -42,7 +44,19 @@ class GithubService
 
   def get_diff(params)
     Rails.cache.fetch("#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}", expires_in: 5.minutes) do
-      `curl -H "Authorization: token #{token}" -H "Accept: application/vnd.github.v3.diff" https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff`
+      uri = URI("https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff")
+
+      req = Net::HTTP::Get.new(uri)
+      req['Authorization'] = "token #{token}"
+      req['Accept'] = "application/vnd.github.v3.diff"
+
+      res = nil
+
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http|
+        res = http.request(req)
+      }
+
+      res.body
     end
   end
 
