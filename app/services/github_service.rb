@@ -13,7 +13,7 @@ class GithubService
       repos_for(organization).each do |repo|
         if repo.issues_count > 0
           pull_requests = github.pull_requests.list(user: organization, repo: repo.name, auto_pagination: true)
-          binding.pry
+
           pull_requests.each do |pull|
             pulls << PullRequest.new(pull)
           end
