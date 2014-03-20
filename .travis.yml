@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.1.0
+before_script:
+  - "export SESSION_SECRET='adea8593e1aa84d5ce793340e0cc18f11ab41f83f9e08e988cfbc11afdb25b268e997f0a9277e4978fa323ae989b1c91e9c5414d2923c3f8de9399cc7d0b9058'"
+  - "cp config/database.yml.postgresql config/database.yml"
+  - "mkdir -p tmp/cache"
+  - "bundle exec rake db:create"
+  - "bundle exec rake db:migrate"
+  - "bundle exec rake db:test:prepare"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
+script: "bundle exec rake"
+
