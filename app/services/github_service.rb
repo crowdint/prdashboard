@@ -42,13 +42,22 @@ class GithubService
 
   def get_diff(params)
     Rails.cache.fetch("#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}", expires_in: 5.minutes) do
-      `curl -H "Authorization: token #{token}" -H "Accept: application/vnd.github.v3.diff" https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff`
+      uri = URI("https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff")
+
+      req = Net::HTTP::Get.new(uri)
+      req['Authorization'] = "token #{token}"
+      req['Accept'] = "application/vnd.github.v3.diff"
+
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http|
+        http.request(req)
+      }
+
+      res.body
     end
   end
 
   def create_pull_comment(params)
     user, repo = get_user_repo(params)
-
     github.issues.comments.create user, repo, params[:pull], body: params[:text]
   end
 
@@ -70,7 +79,7 @@ class GithubService
     github.pull_requests.merge user, repo, params[:id], commit_message: "Merged from PR Dashboard by #{current_user.nickname}"
   end
 
-  def close_pull_request(params, current_user)
+  def close_pull_request(params, _)
     user, repo = get_user_repo(params)
     github.pull_requests.update user, repo, params[:id], state: 'closed'
   end
