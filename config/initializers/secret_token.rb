@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Prdashboard::Application.config.secret_key_base = '80b6bb6652c4801ad3a05ae6a64307aaea968eaf93b49c083a89c2cb0e2a79167adbc2c1e8f133de3711a181e173f33556a0c64f9422749568c9f415ffa6b9a6'
+Prdashboard::Application.config.secret_key_base = ENV['SECRET_TOKEN']
