@@ -27,6 +27,9 @@ You need to set the following enviroment variables, you could create a
 
     GITHUB_KEY=your-key
     GITHUB_SECRET=your-secret
+    SECRET_TOKEN=3c129645bbb2ca4b21ff1998bba2339adf86c06ea247a9086bc353ad7220c56c5af587b1a6946b
+
+The SECRET_TOKEN value is just an example.
 
 ## Setup
 
