@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 2.1.0
 before_script:
-  - "export SESSION_SECRET='adea8593e1aa84d5ce793340e0cc18f11ab41f83f9e08e988cfbc11afdb25b268e997f0a9277e4978fa323ae989b1c91e9c5414d2923c3f8de9399cc7d0b9058'"
+  - "export SECRET_TOKEN='869ee827f9b463e63e052173c4ecd0ecc129645bbb2ca4b21ff1998303d54e079fc392f6c9bba2339adf86c06ea247a9086bc353ad7220c56c5af587b1a6946b'"
   - "cp config/database.yml.postgresql config/database.yml"
   - "mkdir -p tmp/cache"
   - "bundle exec rake db:create"
