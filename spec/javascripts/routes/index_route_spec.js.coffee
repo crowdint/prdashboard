@@ -1,6 +1,6 @@
 #= require spec_helper
 
-describe 'Index Route', ->
+describe 'PRDashboard.IndexRoute', ->
 
   it 'redirects to PullsRoute', ->
     mock = sinon.mock(testHelper.lookup('route', 'index'))
