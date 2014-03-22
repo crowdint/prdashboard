@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1.0
+  - 2.1.1
 before_script:
   - "export SECRET_TOKEN='869ee827f9b463e63e052173c4ecd0ecc129645bbb2ca4b21ff1998303d54e079fc392f6c9bba2339adf86c06ea247a9086bc353ad7220c56c5af587b1a6946b'"
   - "cp config/database.yml.postgresql config/database.yml"
