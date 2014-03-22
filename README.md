@@ -8,8 +8,8 @@ as backend service, and Ember.js as frontend framework.
 
 ## Requirements
 
-- Ruby 2.1.0
-- Rails 4.0.3
+- Ruby 2.1.1
+- Rails 4.0.4
 
 ## Github Keys
 
