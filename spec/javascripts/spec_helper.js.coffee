@@ -2,6 +2,8 @@
 #= require application
 #= require ember_application
 #= require ember_mocha_adapter
+#= require support/fake_server
+#= require_tree ./support/fixtures
 
 Ember.Test.adapter = Ember.Test.MochaAdapter.create()
 PRDashboard.setupForTesting()
@@ -15,8 +17,6 @@ chai.config.includeStack = true
 ENV = {
   TESTING: true
 }
-
-window.server = sinon.fakeServer.create()
 
 window.testHelper =
   lookup: (object, object_name) ->
