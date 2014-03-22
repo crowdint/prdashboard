@@ -115,6 +115,7 @@ GEM
     multi_json (1.9.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    newrelic_rpm (3.7.3.204)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth2 (0.9.3)
@@ -233,6 +234,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   json_spec
+  newrelic_rpm
   oj
   omniauth-github
   pg

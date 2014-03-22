@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.1'
 gem 'rails', '4.0.3'
 
 gem 'bootstrap-sass', '~> 3.1.1'
@@ -12,6 +12,7 @@ gem 'github_api'
 gem 'haml-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
+gem 'newrelic_rpm'
 gem 'oj'
 gem 'omniauth-github'
 gem 'pg'
