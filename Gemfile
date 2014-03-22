@@ -21,11 +21,13 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'coveralls', require: false
   gem 'dotenv'
   gem 'json_spec'
+  gem 'konacha'
   gem 'pry'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'coveralls', require: false
+  gem 'sinon-rails'
 end
 
