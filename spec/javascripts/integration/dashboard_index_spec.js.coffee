@@ -51,7 +51,7 @@ describe 'Dashboard Index', ->
       it 'shows all the repos', ->
         expect($('#pulls-table tbody tr').length).to.equal(4)
 
-  context 'when I choose another MagmaConf org (1 private repo, 1 public)', ->
+  context 'when I choose MagmaConf org (1 private repo, 1 public)', ->
     beforeEach ->
       $('.orgs-dropdown').val('MagmaConf').change()
       wait 1000
