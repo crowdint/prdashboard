@@ -4,7 +4,9 @@
       <label>Organization:</label>
     </div>
     <div class='col-lg-5 col-xs-12 col-sm-8 col-md-4'>
-      {{view Em.Select content=orgs valueBinding='org' optionValuePath='content.name' optionLabelPath='content.name' class='form-control'}}
+      {{view Em.Select content=orgs valueBinding='org'
+      optionValuePath='content.name' optionLabelPath='content.name'
+      class='form-control orgs-dropdown'}}
     </div>
   </div>
 </div>

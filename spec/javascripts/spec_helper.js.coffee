@@ -30,6 +30,8 @@ window.ga = Em.K
 
 $.fx.off = true
 
+localStorage.setItem('organization', 'crowdint')
+
 afterEach ->
   PRDashboard.reset()
 
