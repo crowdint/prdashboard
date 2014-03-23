@@ -1,4 +1,4 @@
-server.respondWith('GET', '/api/v1/pulls', [
+window.server.respondWith('GET', "/api/v1/pulls?organization=crowdint", [
   200,
   { 'Content-Type': 'application/json' },
   '
@@ -108,4 +108,69 @@ server.respondWith('GET', '/api/v1/pulls', [
   }
   '
 ])
+
+window.server.respondWith('GET', "/api/v1/pulls?organization=MagmaConf", [
+  200,
+  { 'Content-Type': 'application/json' },
+  '
+  {
+    "pulls": [
+      {
+        "id": 349136,
+        "title": "Le Call for papers",
+        "url": "https://github.com/magmaconf/cfp/pull/1",
+        "created_at": "2011-09-22T19:30:47Z",
+        "comments_count": null,
+        "number": 1,
+        "is_private": false,
+        "repository": 123,
+        "user": 456
+      },
+      {
+        "id": 13479117,
+        "title": "Le Landing page",
+        "url": "https://github.com/magmaconf/site/pull/3",
+        "created_at": "2014-03-12T16:22:32Z",
+        "comments_count": null,
+        "number": 3,
+        "is_private": true,
+        "repository": 231,
+        "user": 908
+      }
+    ],
+    "repositories": [
+      {
+        "id": 123,
+        "full_name": "magmaconf/cfp",
+        "url": "https://github.com/magmaconf/cfp",
+        "description": "Call For Papers",
+        "private": false
+      },
+      {
+        "id": 12093052,
+        "full_name": "magmaconf/site",
+        "url": "https://github.com/magmaconf/site",
+        "description": "Site Homepage",
+        "private": true
+      }
+    ],
+    "users": [
+      {
+        "id": 456,
+        "nickname": "efigarolam",
+        "avatar": "https://avatars.githubusercontent.com/u/2565682?",
+        "url": "https://github.com/efigarolam"
+      },
+      {
+        "id": 908,
+        "nickname": "ingedmundo",
+        "avatar": "https://avatars.githubusercontent.com/u/1649055?",
+        "url": "https://github.com/ingedmundo"
+      }
+    ]
+  }
+  '
+])
+
+
 
