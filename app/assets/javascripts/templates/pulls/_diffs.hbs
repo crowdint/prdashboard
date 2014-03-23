@@ -42,7 +42,7 @@
             {{/each}}
             <div class='row comment well well-sm'>
               <div id='new-comment' class='col-lg-9'>
-                {{textarea valueBinding=newComment}}
+                {{textarea valueBinding='newComment'}}
               </div>
               <div class='col-lg-3'>
                 <button type='button' class='btn btn-success'  {{action 'newComment' currentPR}}><span class='glyphicon glyphicon-comment'/></button>
