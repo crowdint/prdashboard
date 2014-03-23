@@ -5,9 +5,10 @@ describe 'PRDashboard.PullsRoute', ->
 
   beforeEach ->
     pullsController = testHelper.lookup 'controller', 'pulls'
-    pullsController.set('org', 'crowdint')
+    Em.run ->
+      pullsController.set('org', 'crowdint')
 
-    visit('/pull_requests')
+    visit '/pull_requests'
 
   # The fixtures for the AJAX call contains only 1 private pull request.
   it "sets controller 'content' property with private pulls", ->
