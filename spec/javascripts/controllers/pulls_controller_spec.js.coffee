@@ -127,3 +127,18 @@ describe 'PRDashboard.PullsController', ->
     it "sends a correct 'repo' param", ->
       expect($.ajax.getCall(0).args[0].data.repo).to.equal(pull.get('repository.full_name'))
 
+  describe '#removePull', ->
+    pull = null
+
+    beforeEach ->
+      pull = pullsController.get('content.firstObject')
+
+      Em.run ->
+        pullsController.removePull(pull)
+
+    it "removes a pull object from controller's content property", ->
+      expect(pullsController.get('content').contains(pull)).to.equal(false)
+
+    it "removes a pull object from controller's all property", ->
+      expect(pullsController.get('all').contains(pull)).to.equal(false)
+
