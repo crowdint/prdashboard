@@ -142,3 +142,32 @@ describe 'PRDashboard.PullsController', ->
     it "removes a pull object from controller's all property", ->
       expect(pullsController.get('all').contains(pull)).to.equal(false)
 
+  describe '#loadComments', ->
+    pull = null
+
+    beforeEach ->
+      sinon.spy($, 'ajax')
+      pull = pullsController.get('content.firstObject')
+
+      Em.run ->
+        pullsController.set('currentPR', pull)
+        pullsController.loadComments()
+
+    afterEach ->
+      $.ajax.restore()
+
+    it 'calls the $.ajax method', ->
+      expect($.ajax.calledOnce).to.equal(true)
+
+    it 'makes the call to the correct URL', ->
+      expect($.ajax.getCall(0).args[0].url).to.equal("/api/v1/comments")
+
+    it 'makes a GET call', ->
+      expect($.ajax.getCall(0).args[0].type).to.equal('GET')
+
+    it "sends a correct 'pull' param", ->
+      expect($.ajax.getCall(0).args[0].data.pull).to.equal(pull.get('number'))
+
+    it "sends a correct 'repo' param", ->
+      expect($.ajax.getCall(0).args[0].data.repo).to.equal(pull.get('repository.full_name'))
+
