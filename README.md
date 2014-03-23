@@ -43,6 +43,24 @@ After cloning the repo, all you need to do is:
 
 And you are done!
 
+## Specs
+
+All the Rails backend is almost covered with RSpec. To run the test
+suite, use:
+
+    bundle exec rspec
+
+There is also a test suite for the Ember.js frontend app. To run those
+specs, use:
+
+    bundle exec rake konacha:serve
+
+And open your browser on: `http://localhost:3500`
+
+It has a command line runner too, the command is:
+
+    bundle exec rake konacha:run
+
 ## Contributing
 
 Pull requests are welcome, just fork the repo, make your changes (don't
