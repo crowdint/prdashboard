@@ -1,5 +1,6 @@
 #= require sinon
 #= require application
+#= require analytics/analytics
 #= require ember_application
 #= require ember_mocha_adapter
 #= require support/fake_server
@@ -9,9 +10,8 @@ Ember.Test.adapter = Ember.Test.MochaAdapter.create()
 PRDashboard.setupForTesting()
 PRDashboard.injectTestHelpers()
 
-mocha.ui 'bdd'
 mocha.globals ['Ember', 'DS', 'PRDashboard', 'MD5']
-mocha.timeout 5
+mocha.timeout 1000
 chai.config.includeStack = true
 
 ENV = {
