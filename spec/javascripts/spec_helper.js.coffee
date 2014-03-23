@@ -1,6 +1,5 @@
 #= require sinon
 #= require application
-#= require analytics/analytics
 #= require ember_application
 #= require ember_mocha_adapter
 #= require support/fake_server
@@ -27,6 +26,7 @@ PRDashboard.Router.reopen
   location: 'none'
 
 Konacha.reset = Em.K
+window.ga = Em.K
 
 $.fx.off = true
 
