@@ -95,6 +95,19 @@ PRDashboard.PullsController = Em.ArrayController.extend
     @get('content').removeObject(pull)
     @get('all').removeObject(pull)
 
+  updatePR: (pull, action) ->
+    ga('send', 'event', 'review', action)
+    $.ajax
+      type: 'PUT'
+      url: "/api/v1/pulls/#{pull.get('number')}"
+      data:
+        repo: pull.get('repository.full_name')
+        kind: action
+      success: ((response) ->
+        @removePull(pull)
+        @closeModal()
+      ).bind(@)
+
   actions:
     applyFilter: (filter) ->
       ga('send', 'event', 'pulls', 'filter', filter)
@@ -125,32 +138,13 @@ PRDashboard.PullsController = Em.ArrayController.extend
       ga('send', 'event', 'review', 'lgtm')
 
     mergePR: (pull) ->
-      ga('send', 'event', 'review', 'merge')
-      $.ajax
-        type: 'PUT'
-        url: "/api/v1/pulls/#{pull.get('number')}"
-        data:
-          repo: pull.get('repository.full_name')
-          kind: 'merge'
-        success: ((response) ->
-          @removePull(pull)
-          @closeModal()
-        ).bind(@)
+      @updatePR(pull, 'merge')
 
     closePR: (pull) ->
-      ga('send', 'event', 'review', 'close')
-      $.ajax
-        type: 'PUT'
-        url: "/api/v1/pulls/#{pull.get('number')}"
-        data:
-          repo: pull.get('repository.full_name')
-          kind: 'close'
-        success: ((response) ->
-          @removePull(pull)
-          @closeModal()
-        ).bind(@)
+      @updatePR(pull, 'close')
 
     newComment: (pull)->
       @commentPR pull, @get('newComment')
       ga('send', 'event', 'review', 'comment')
       @set 'newComment', null
+

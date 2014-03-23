@@ -72,3 +72,31 @@ describe 'PRDashboard.PullsController', ->
     it "sends a correct 'text' param", ->
       expect($.ajax.getCall(0).args[0].data.text).to.equal(commentText)
 
+  describe '#updatePR', ->
+    pull = null
+    action = null
+
+    beforeEach ->
+      sinon.spy($, 'ajax')
+      pull = pullsController.get('content.firstObject')
+      action = 'merge'
+      pullsController.updatePR(pull, action)
+
+    afterEach ->
+      $.ajax.restore()
+
+    it 'calls the $.ajax method', ->
+      expect($.ajax.calledOnce).to.equal(true)
+
+    it 'makes the call to the correct URL', ->
+      expect($.ajax.getCall(0).args[0].url).to.equal("/api/v1/pulls/#{pull.get('number')}")
+
+    it 'makes a PUT call', ->
+      expect($.ajax.getCall(0).args[0].type).to.equal('PUT')
+
+    it "sends a correct 'repo' param", ->
+      expect($.ajax.getCall(0).args[0].data.repo).to.equal(pull.get('repository.full_name'))
+
+    it "sends a correct 'kind' param", ->
+      expect($.ajax.getCall(0).args[0].data.kind).to.equal(action)
+
