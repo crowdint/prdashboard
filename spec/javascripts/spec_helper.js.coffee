@@ -11,7 +11,7 @@ PRDashboard.setupForTesting()
 PRDashboard.injectTestHelpers()
 
 mocha.globals ['Ember', 'DS', 'PRDashboard', 'MD5']
-mocha.timeout 1000
+mocha.timeout 2000
 chai.config.includeStack = true
 
 ENV = {
