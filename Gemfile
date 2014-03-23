@@ -28,6 +28,7 @@ group :development, :test do
   gem 'konacha'
   gem 'pry'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'sinon-rails'
 end
