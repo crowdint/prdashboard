@@ -108,6 +108,21 @@ PRDashboard.PullsController = Em.ArrayController.extend
         @closeModal()
       ).bind(@)
 
+  getDiff: (pull) ->
+    @set('currentPR', pull)
+    ga('send', 'event', 'review', 'show')
+
+    $.ajax
+      type: 'GET'
+      url: "api/v1/diffs/#{pull.get('number')}"
+      dataType: 'text'
+      data:
+        repo: pull.get('repository.full_name')
+      success: ((response) ->
+        @loadComments()
+        @prepareDiff(response)
+      ).bind(@)
+
   actions:
     applyFilter: (filter) ->
       ga('send', 'event', 'pulls', 'filter', filter)
@@ -117,21 +132,8 @@ PRDashboard.PullsController = Em.ArrayController.extend
       ga('send', 'event', 'pulls', 'sort', 'created_at')
       @set('sortAscending', !@get('sortAscending'))
 
-
     showDiff: (pull) ->
-      @set('currentPR', pull)
-      ga('send', 'event', 'review', 'show')
-
-      $.ajax
-        type: 'GET'
-        url: "api/v1/diffs/#{pull.get('number')}"
-        dataType: 'text'
-        data:
-          repo: pull.get('repository.full_name')
-        success: ((response) ->
-          @loadComments()
-          @prepareDiff(response)
-        ).bind(@)
+      @getDiff(pull)
 
     lgtmPR: (pull, text) ->
       @commentPR(pull, text)

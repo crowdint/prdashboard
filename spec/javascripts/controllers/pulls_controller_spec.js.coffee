@@ -100,3 +100,30 @@ describe 'PRDashboard.PullsController', ->
     it "sends a correct 'kind' param", ->
       expect($.ajax.getCall(0).args[0].data.kind).to.equal(action)
 
+  describe '#getDiff', ->
+    pull = null
+
+    beforeEach ->
+      sinon.spy($, 'ajax')
+      pull = pullsController.get('content.firstObject')
+      Em.run ->
+        pullsController.getDiff(pull)
+
+    afterEach ->
+      $.ajax.restore()
+
+    it "sets controller's currentPR property", ->
+      expect(pullsController.get('currentPR')).to.equal(pull)
+
+    it 'calls the $.ajax method', ->
+      expect($.ajax.calledOnce).to.equal(true)
+
+    it 'makes the call to the correct URL', ->
+      expect($.ajax.getCall(0).args[0].url).to.equal("api/v1/diffs/#{pull.get('number')}")
+
+    it 'makes a GET call', ->
+      expect($.ajax.getCall(0).args[0].type).to.equal('GET')
+
+    it "sends a correct 'repo' param", ->
+      expect($.ajax.getCall(0).args[0].data.repo).to.equal(pull.get('repository.full_name'))
+
