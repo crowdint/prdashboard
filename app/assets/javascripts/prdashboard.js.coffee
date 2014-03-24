@@ -2,6 +2,7 @@
 #= require_tree ./models
 #= require_tree ./mixins
 #= require_tree ./controllers
+#= require ./views/shared/unbound_select
 #= require_tree ./views
 #= require_tree ./helpers
 #= require_tree ./templates
