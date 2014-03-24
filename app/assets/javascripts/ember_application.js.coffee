@@ -10,3 +10,4 @@ window.PRDashboard = Ember.Application.create()
 
 
 PRDashboard.deferReadiness()
+
