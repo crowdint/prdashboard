@@ -80,3 +80,27 @@ describe 'Dashboard Index', ->
       it 'shows all the repos', ->
         expect($('#pulls-table tbody tr').length).to.equal(2)
 
+  describe 'Sorting table', ->
+    firstPullTitle = null
+    lastPullTitle = null
+
+    beforeEach ->
+      click '.public-filter'
+      firstPullTitle = $('#pulls-table tbody tr:first td:eq(1) a').text()
+      lastPullTitle = $('#pulls-table tbody tr:last td:eq(1) a').text()
+
+    context "when I click the 'Created At' table header", ->
+      beforeEach ->
+        click '.created-at-sort'
+
+      it 'sorts the pulls and the last becomes the first', ->
+        expect($('#pulls-table tbody tr:first td:eq(1) a').text()).to.equal(lastPullTitle)
+
+    context "when I double click the 'Created At' table header", ->
+      beforeEach ->
+        click '.created-at-sort'
+        click '.created-at-sort'
+
+      it 'keeps the order of the pulls', ->
+        expect($('#pulls-table tbody tr:first td:eq(1) a').text()).to.equal(firstPullTitle)
+
