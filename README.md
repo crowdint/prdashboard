@@ -6,6 +6,10 @@
 PR Dashboard is a pull requests reviewing tool build on top of a Rails
 as backend service, and Ember.js as frontend framework.
 
+## It's alive
+There is an instance of PR Dashboard running on
+[prs.crowdint.com](http://prs.crowdint.com). Give it a try!
+
 ## Requirements
 
 - Ruby 2.1.1
