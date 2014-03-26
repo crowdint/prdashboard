@@ -5,6 +5,7 @@ Em.ChosenSelect = Em.UnboundSelect.extend
 
   didInsertElement: ->
     @set('chosenInput', $(".#{@get('chosenClass')}"))
+    @get('chosenInput').attr('data-placeholder', @get('placeholder'))
     @get('chosenInput').chosen
       search_contains: true
 

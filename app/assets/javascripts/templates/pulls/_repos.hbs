@@ -3,10 +3,15 @@
     <label>Repository:</label>
   </div>
   <div class='col-lg-9 col-xs-12 col-sm-8 col-md-9'>
-    {{view Em.ChosenSelect content=repos optionValuePath='content.full_name'
-    optionLabelPath='content.full_name' multiple=true
-    chosenSelectionBinding='selectedRepos'
-    class='repos-filter form-control' chosenClass='repos-filter'}}
+    {{view Em.ChosenSelect
+      content=repos
+      optionValuePath='content.full_name'
+      optionLabelPath='content.full_name'
+      multiple=true
+      chosenSelectionBinding='selectedRepos'
+      class='repos-filter form-control'
+      chosenClass='repos-filter'
+      placeholder='Choose some Repos'}}
   </div>
 </div>
 
