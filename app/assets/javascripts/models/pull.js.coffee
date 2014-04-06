@@ -5,6 +5,7 @@ PRDashboard.Pull = DS.Model.extend
   comments_count: DS.attr('number')
   number:         DS.attr('string')
   is_private:     DS.attr('boolean')
+  mergeable:      DS.attr('boolean')
   user:           DS.belongsTo('user', { async: true })
   repository:     DS.belongsTo('repository', { async: true })
   comments:       DS.hasMany('comment')

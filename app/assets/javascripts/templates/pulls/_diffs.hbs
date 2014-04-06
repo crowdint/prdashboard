@@ -24,21 +24,28 @@
             </pre>
           </div>
           <div id='pr-comments' class='col-lg-3 col-md-4 col-sm-12 col-xs-12 pull-right'>
+            {{#unless currentPR.mergeable}}
+              <div class='row'>
+                  <div class="alert alert-danger">
+                      <p><strong>Oops!</strong> It seems like this pull request can't be automatically merged.</p>
+                  </div>
+              </div>
+            {{/unless}}
             {{#each comment in currentPR.comments}}
-            <div class='row comment well well-sm'>
-              <div class='col-lg-2 hidden-xs hidden-sm'>
-                <a {{bind-attr href='comment.user_url'}} target='_blank'>
-                  <img {{bind-attr src='comment.avatar' alt='comment.username'}} class='img-circle' height='40px' width='40px' />
-                </a>
+              <div class='row comment well well-sm'>
+                <div class='col-lg-2 hidden-xs hidden-sm'>
+                  <a {{bind-attr href='comment.user_url'}} target='_blank'>
+                    <img {{bind-attr src='comment.avatar' alt='comment.username'}} class='img-circle' height='40px' width='40px' />
+                  </a>
+                </div>
+                <div class='col-lg-10'>
+                  <p>
+                    {{comment.body}}
+                    <em>&horbar; by</em>
+                    <a {{bind-attr href='comment.user_url'}} target='_blank'>{{comment.username}}</a>
+                  </p>
+                </div>
               </div>
-              <div class='col-lg-10'>
-                <p>
-                  {{comment.body}}
-                  <em>&horbar; by</em>
-                  <a {{bind-attr href='comment.user_url'}} target='_blank'>{{comment.username}}</a>
-                </p>
-              </div>
-            </div>
             {{/each}}
             <div class='row comment well well-sm'>
               <div id='new-comment' class='col-lg-9'>
@@ -53,7 +60,7 @@
       </div>
       <div class='modal-footer'>
         <button type='button' class='btn btn-danger' {{action 'closePR' currentPR}}><span class='glyphicon glyphicon-trash'></span> Close PR</button>
-        <button type='button' class='btn btn-warning' {{action 'mergePR' currentPR}}><span class='glyphicon glyphicon-flash'></span> Merge</button>
+        <button type='button' class='btn btn-warning' {{bind-attr disabled='notMergeable'}} {{action 'mergePR' currentPR}}><span class='glyphicon glyphicon-flash'></span> Merge</button>
         <button type='button' class='btn btn-success' {{action 'lgtmPR' currentPR 'LGTM :shipit:'}}><span class='glyphicon glyphicon-thumbs-up'></span> LGTM</button>
         <a {{bind-attr href='currentPR.files_url'}} class='btn btn-primary' target='_blank'><span class='glyphicon glyphicon-file'></span> Go to files</a>
       </div>

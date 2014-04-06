@@ -10,11 +10,15 @@ module Api
 
       def update
         action = "#{action_param}_pull_request".to_sym
-        GithubService.new(session[:user_token]).send(action, merge_params, current_user)
+        GithubService.new(session[:user_token]).send(action, pull_params, current_user)
 
         Rails.cache.clear
 
         render json: { status: :ok }
+      end
+
+      def mergeable
+        render json: { mergeable: GithubService.new(session[:user_token]).pull_mergeable?(pull_params) }
       end
 
       private
@@ -23,7 +27,7 @@ module Api
         params[:kind]
       end
 
-      def merge_params
+      def pull_params
         params.permit(:id, :repo)
       end
 

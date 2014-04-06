@@ -8,6 +8,8 @@ Prdashboard::Application.routes.draw do
       resources :organizations, only: [:index]
       resources :diffs,         only: [:show]
       resources :comments,      only: [:create, :index]
+
+      get '/pulls/:id/mergeable', to: 'pulls#mergeable'
     end
   end
 

@@ -2,6 +2,7 @@ PRDashboard.Reviews = Em.Mixin.create
   currentDiff: ''
   currentPR: null
   newComment: null
+  notMergeable: Em.computed.not('currentPR.mergeable')
 
   prepareDiff: (diff) ->
     @set('currentDiff', diff)
@@ -57,6 +58,17 @@ PRDashboard.Reviews = Em.Mixin.create
         repo: pull.get('repository.full_name')
       success: ((response) ->
         @loadComments()
+        @getMergeability()
         @prepareDiff(response)
+      ).bind(@)
+
+  getMergeability: ->
+    $.ajax
+      type: 'GET'
+      url: "api/v1/pulls/#{@get('currentPR.number')}/mergeable"
+      data:
+        repo: @get('currentPR.repository.full_name')
+      success: ((response) ->
+        @set('currentPR.mergeable', response.mergeable)
       ).bind(@)
 

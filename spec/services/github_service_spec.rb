@@ -198,5 +198,15 @@ describe GithubService do
       expect(subject.close_pull_request(pull_params, current_user)).to be_true
     end
   end
+
+  describe '#pull_mergeable?' do
+    before do
+      Github::Client.any_instance.stub_chain(:pull_requests, :get).and_return({ mergeable: true })
+    end
+
+    it 'returns the mergeable property of a pull request' do
+      expect(subject.pull_mergeable?(pull_params)).to be_true
+    end
+  end
 end
 

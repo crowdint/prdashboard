@@ -129,5 +129,22 @@ describe Api::V1::PullsController do
       end
     end
   end
+
+  describe '#mergeable' do
+    before do
+      GithubService.any_instance.stub(:pull_mergeable?).and_return(true)
+      signin_user
+      xhr :get, :mergeable, id: 1
+    end
+
+    it 'returns status code 200' do
+      expect(response.status).to eql 200
+    end
+
+    it 'returns a correct json object' do
+      expect(response.body).to have_json_path 'mergeable'
+    end
+  end
+
 end
 
