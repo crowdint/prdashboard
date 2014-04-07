@@ -85,12 +85,10 @@ class GithubService
   end
 
   def pull_mergeable?(params)
-    Rails.cache.fetch("#{cache_key}/pulls/mergeability/#{params[:repo]}/#{params[:id]}}", expires_in: 5.minutes) do
-      user, repo = get_user_repo(params)
-      pull = github.pull_requests.get user, repo, params[:id]
+    user, repo = get_user_repo(params)
+    pull = github.pull_requests.get user, repo, params[:id]
 
-      pull[:mergeable]
-    end
+    pull[:mergeable]
   end
 
   private
