@@ -40,7 +40,7 @@ describe Api::V1::CommentsController do
       it 'returns "invalid credentials" as json message' do
         xhr :get, :index
 
-        expect(response.body).to match /Invalid credentials/
+        expect(response.body).to match(/Invalid credentials/)
       end
     end
   end
@@ -54,7 +54,7 @@ describe Api::V1::CommentsController do
 
     it 'should return ok status' do
       xhr :post, :create
-      expect(response.body).to match /ok/
+      expect(response.body).to match(/ok/)
     end
   end
 end

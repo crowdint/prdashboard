@@ -100,7 +100,7 @@ describe Api::V1::PullsController do
       it 'returns "invalid credentials" as json message' do
         xhr :get, :index
 
-        expect(response.body).to match /Invalid credentials/
+        expect(response.body).to match(/Invalid credentials/)
       end
     end
   end
@@ -116,7 +116,7 @@ describe Api::V1::PullsController do
 
       it 'should return ok status' do
         patch :update, id: 1, kind: 'merge'
-        expect(response.body).to match /ok/
+        expect(response.body).to match(/ok/)
       end
     end
 
@@ -125,7 +125,7 @@ describe Api::V1::PullsController do
 
       it 'should return ok status' do
         patch :update, id: 1, kind: 'close'
-        expect(response.body).to match /ok/
+        expect(response.body).to match(/ok/)
       end
     end
   end

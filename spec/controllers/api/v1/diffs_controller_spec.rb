@@ -18,7 +18,7 @@ describe Api::V1::DiffsController do
       end
 
       it 'renders the correct text' do
-        expect(response.body).to match /le diff/
+        expect(response.body).to match(/le diff/)
       end
     end
 
@@ -26,7 +26,7 @@ describe Api::V1::DiffsController do
       it 'returns "invalid credentials" as json message' do
         xhr :get, :show, id: 1
 
-        expect(response.body).to match /Invalid credentials/
+        expect(response.body).to match(/Invalid credentials/)
       end
     end
   end

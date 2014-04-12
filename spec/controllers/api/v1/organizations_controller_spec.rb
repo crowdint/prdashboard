@@ -39,7 +39,7 @@ describe Api::V1::OrganizationsController do
       it 'returns "invalid credentials" as json message' do
         xhr :get, :index
 
-        expect(response.body).to match /Invalid credentials/
+        expect(response.body).to match(/Invalid credentials/)
       end
     end
   end
