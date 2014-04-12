@@ -33,3 +33,6 @@ group :development, :test do
   gem 'sinon-rails'
 end
 
+group :development do
+  gem 'rubocop', require: false
+end
