@@ -1,10 +1,10 @@
 module Api
   module V1
     class PullsController < Api::V1::ApplicationController
-      before_filter :authenticate_user!
+      before_action :authenticate_user!
 
       def index
-        @pull_requests, @repositories, @users = get_pull_requests
+        @pull_requests, @repositories, @users = pull_requests
         render 'api/v1/pulls/index'
       end
 
@@ -31,8 +31,8 @@ module Api
         params.permit(:id, :repo)
       end
 
-      def get_pull_requests
-        GithubService.new(session[:user_token]).get_pull_requests organization
+      def pull_requests
+        GithubService.new(session[:user_token]).pull_requests organization
       end
 
       def organization

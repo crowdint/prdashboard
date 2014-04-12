@@ -6,7 +6,7 @@ class GithubService
     @github = Github.new oauth_token: token
   end
 
-  def get_pull_requests(organization)
+  def pull_requests(organization)
     Rails.cache.fetch("#{cache_key}/#{organization}/pulls", expires_in: 5.minutes) do
       pulls = []
 
@@ -27,7 +27,7 @@ class GithubService
     end
   end
 
-  def get_organizations
+  def organizations
     orgs = []
     organizations = github.orgs.list
 
@@ -40,30 +40,30 @@ class GithubService
     orgs.sort_by { |org| org.name }
   end
 
-  def get_diff(params)
+  def diff(params)
     Rails.cache.fetch("#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}", expires_in: 5.minutes) do
       uri = URI("https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff")
 
       req = Net::HTTP::Get.new(uri)
       req['Authorization'] = "token #{token}"
-      req['Accept'] = "application/vnd.github.v3.diff"
+      req['Accept'] = 'application/vnd.github.v3.diff'
 
-      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http|
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
         http.request(req)
-      }
+      end
 
       res.body
     end
   end
 
   def create_pull_comment(params)
-    user, repo = get_user_repo(params)
+    user, repo = user_repo(params)
     github.issues.comments.create user, repo, params[:pull], body: params[:text]
   end
 
-  def get_pull_comments(params)
+  def pull_comments(params)
     comments_list = []
-    user, repo = get_user_repo(params)
+    user, repo = user_repo(params)
 
     comments = github.issues.comments.list(user, repo, issue_id: params[:pull], auto_pagination: true)
 
@@ -75,17 +75,17 @@ class GithubService
   end
 
   def merge_pull_request(params, current_user)
-    user, repo = get_user_repo(params)
+    user, repo = user_repo(params)
     github.pull_requests.merge user, repo, params[:id], commit_message: "Merged from PR Dashboard by #{current_user.nickname}"
   end
 
   def close_pull_request(params, _)
-    user, repo = get_user_repo(params)
+    user, repo = user_repo(params)
     github.pull_requests.update user, repo, params[:id], state: 'closed'
   end
 
   def pull_mergeable?(params)
-    user, repo = get_user_repo(params)
+    user, repo = user_repo(params)
     pull = github.pull_requests.get user, repo, params[:id]
 
     pull[:mergeable]
@@ -107,9 +107,9 @@ class GithubService
     Digest::MD5.hexdigest("#{@token}")
   end
 
-  def get_user_repo(params)
+  def user_repo(params)
     info = params[:repo].split('/')
-    [ info.first, info.last ]
+    [info.first, info.last]
   end
 
 end

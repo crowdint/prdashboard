@@ -19,7 +19,7 @@ describe Api::V1::CommentsController do
 
     context 'when user is signed in' do
       before do
-        GithubService.any_instance.stub(:get_pull_comments).and_return comments
+        GithubService.any_instance.stub(:pull_comments).and_return comments
         signin_user
         xhr :get, :index
       end

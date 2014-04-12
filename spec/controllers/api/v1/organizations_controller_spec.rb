@@ -16,7 +16,7 @@ describe Api::V1::OrganizationsController do
       end
 
       before do
-        GithubService.any_instance.stub(:get_organizations).and_return organizations
+        GithubService.any_instance.stub(:organizations).and_return organizations
         signin_user
       end
 

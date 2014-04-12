@@ -8,7 +8,7 @@ describe Api::V1::DiffsController do
       let(:diff) { "le diff" }
 
       before do
-        GithubService.any_instance.stub(:get_diff).and_return diff
+        GithubService.any_instance.stub(:diff).and_return diff
         signin_user
         xhr :get, :show, id: 1
       end

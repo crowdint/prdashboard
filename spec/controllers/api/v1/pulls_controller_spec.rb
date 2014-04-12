@@ -53,7 +53,7 @@ describe Api::V1::PullsController do
   describe '#index' do
     context 'when user is signed in' do
       before do
-        GithubService.any_instance.stub(:get_pull_requests).and_return pulls
+        GithubService.any_instance.stub(:pull_requests).and_return pulls
         signin_user
       end
 

@@ -1,10 +1,10 @@
 module Api
   module V1
     class CommentsController < Api::V1::ApplicationController
-      before_filter :authenticate_user!
+      before_action :authenticate_user!
 
       def index
-        @comments = GithubService.new(session[:user_token]).get_pull_comments(comment_params)
+        @comments = GithubService.new(session[:user_token]).pull_comments(comment_params)
 
         render 'api/v1/comments/index'
       end

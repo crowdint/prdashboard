@@ -1,10 +1,10 @@
 module Api
   module V1
     class DiffsController < Api::V1::ApplicationController
-      before_filter :authenticate_user!
+      before_action :authenticate_user!
 
       def show
-        render text: GithubService.new(session[:user_token]).get_diff(diff_params)
+        render text: GithubService.new(session[:user_token]).diff(diff_params)
       end
 
       private
