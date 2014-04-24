@@ -3,6 +3,13 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-21109958-7', 'crowdint.com');
-ga('send', 'pageview');
+$.ajax({
+  url: '/analytics',
+  success: function(keys) {
+    if (keys.id) {
+      ga('create', keys.id, keys.domain);
+      ga('send', 'pageview');
+    }
+  }
+});
 
