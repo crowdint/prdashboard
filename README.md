@@ -65,7 +65,7 @@ It has a command line runner too, the command is:
 
     bundle exec rake konacha:run
 
-## Contributing
+## Contribute
 
 Pull requests are welcome, just fork the repo, make your changes (don't
 forget to add tests) and send the Pull Request. That easy!
