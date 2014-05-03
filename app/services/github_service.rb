@@ -7,7 +7,7 @@ class GithubService
   end
 
   def pull_requests(organization)
-    Rails.cache.fetch("#{cache_key}/#{organization}/pulls", expires_in: 5.days) do
+    Rails.cache.fetch("#{cache_key}/#{organization}/pulls", expires_in: 5.minutes) do
       pulls = []
 
       repos_for(organization).each do |repo|
@@ -41,7 +41,7 @@ class GithubService
   end
 
   def diff(params)
-    Rails.cache.fetch("#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}", expires_in: 5.days) do
+    Rails.cache.fetch("#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}", expires_in: 5.minutes) do
       uri = URI("https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff")
 
       req = Net::HTTP::Get.new(uri)

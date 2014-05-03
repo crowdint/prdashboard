@@ -1,0 +1,30 @@
+.pulls-container
+  @extend .col-lg-12
+
+  #pulls-table
+    @extend .table
+    @extend .table-striped
+
+    td
+      &.center
+        font-weight: 600
+        padding: 20px 0
+        text-align: center
+
+      &.user-avatar
+        @extend .hidden-xs
+
+        img
+          @extend .img-circle
+
+          height: 80px
+          width: 80px
+
+    .show-diff
+      @extend .btn
+      @extend .btn-info
+
+      span
+        @extend .glyphicon
+        @extend .glyphicon-eye-open
+
