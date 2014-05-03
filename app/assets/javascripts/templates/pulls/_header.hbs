@@ -1,15 +1,17 @@
-<div class='row well well-sm'>
-  {{partial 'pulls/orgs'}}
-  {{partial 'pulls/filters'}}
-</div>
+<section class='filters'>
+  <div class='first-row'>
+    {{partial 'pulls/orgs'}}
+    {{partial 'pulls/filters'}}
+  </div>
 
-<div class='row'>
-  {{partial 'pulls/repos'}}
-</div>
+  <div class='second-row'>
+    {{partial 'pulls/repos'}}
+  </div>
+</section>
 
-<div class='row'>
-  <div class='col-lg-12 col-md-12 col-sm-12'>
+<section class='main-title'>
+  <div>
     <h3>Pending Pull Requests</h3>
   </div>
-</div>
+</section>
 
