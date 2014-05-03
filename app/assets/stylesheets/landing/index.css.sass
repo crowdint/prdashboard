@@ -2,20 +2,46 @@
   margin-top: 15px
 
   .info-block
+    @extend .col-lg-4
+    @extend .col-md-4
+    @extend .col-sm-6
+    @extend .col-xs-12
+
     .thumbnail
-      min-height: 300px
       height: 100%
+      min-height: 300px
 
       .info-icon
-        text-align: center
-        font-size: 4em
         color: #2383C4
+        font-size: 4em
+        text-align: center
+
+        span
+          @extend .glyphicon
+
+          &.question
+            @extend .glyphicon-question-sign
+
+          &.time
+            @extend .glyphicon-time
+
+          &.star
+            @extend .glyphicon-star
+
+          &.globe
+            @extend .glyphicon-globe
+
+          &.paperclip
+            @extend .glyphicon-paperclip
+
+          &.user
+            @extend .glyphicon-user
 
       h3
         margin-top: -20px
         text-align: center
 
       p, ul
-        text-align: center
         font-size: 1.2em
+        text-align: center
 
