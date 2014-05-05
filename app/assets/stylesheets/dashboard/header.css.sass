@@ -1,0 +1,94 @@
+.filters
+  .first-row
+    @extend .row
+    @extend .well
+    @extend .well-sm
+
+  .second-row
+    @extend .row
+
+.main-title
+  @extend .row
+
+  div
+    @extend .col-lg-12
+    @extend .col-md-12
+    @extend .col-sm-12
+
+.orgs
+  @extend .col-lg-6
+  @extend .col-xs-12
+  @extend .col-sm-12
+  @extend .col-md-7
+  @extend .pull-left
+
+  .label-container
+    @extend .col-lg-3
+    @extend .col-xs-12
+    @extend .col-sm-4
+    @extend .col-md-3
+
+    label
+      font-size: 1.2em
+      margin-top: 4px
+
+  .orgs-dropdown-container
+    @extend .col-lg-5
+    @extend .col-xs-12
+    @extend .col-sm-8
+    @extend .col-md-4
+
+    select
+      @extend .form-control
+
+.type-filters
+  @extend .col-lg-6
+  @extend .col-md-5
+  @extend .col-sm-12
+  @extend .col-xs-12
+
+  .buttons
+    @extend .btn-group
+    @extend .pull-right
+
+    label
+      @extend .btn-primary
+
+      span
+        &.icon
+          @extend .glyphicon
+
+        &.badge
+          @extend .hidden-xs
+
+      &.private-filter
+        .icon
+          @extend .glyphicon-lock
+
+      &.public-filter
+        .icon
+          @extend .glyphicon-globe
+
+      &.all-filter
+        .icon
+          @extend .glyphicon-asterisk
+
+.repos
+  @extend .col-lg-5
+  @extend .col-xs-12
+  @extend .col-sm-8
+  @extend .col-md-6
+  @extend .pull-right
+
+  .label-container
+    @extend .col-lg-3
+    @extend .col-xs-12
+    @extend .col-sm-4
+    @extend .col-md-3
+
+  .repos-filter-container
+    @extend .col-lg-9
+    @extend .col-xs-12
+    @extend .col-sm-8
+    @extend .col-md-9
+

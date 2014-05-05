@@ -1,6 +1,6 @@
 html
-  position: relative
   min-height: 100%
+  position: relative
 
 body
   margin-bottom: 50px
@@ -10,19 +10,30 @@ body
 
 
 footer
-  position: absolute
-  bottom: 0
-  width: 100%
-  height: 50px
   background-color: #2C3E50
   border-color: #2C3E50
+  bottom: 0
   color: #FFF
+  height: 50px
+  position: absolute
+  width: 100%
 
-  .crowd-logo
-    padding-top: 10px
+  .logo
+    @extend .col-lg-1
+    @extend .col-md-1
+    @extend .col-sm-2
+    @extend .col-xs-3
+
+    img
+      padding-top: 10px
 
   .slogan
-    line-height: 50px
+    @extend .col-lg-11
+    @extend .col-md-11
+    @extend .col-sm-10
+    @extend .col-xs-9
+
     font-size: 1em
+    line-height: 50px
 
 

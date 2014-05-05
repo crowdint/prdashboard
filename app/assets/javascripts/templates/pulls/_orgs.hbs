@@ -1,12 +1,12 @@
-<div id='orgs' class='col-lg-6 col-xs-12 col-sm-12 col-md-7 pull-left'>
+<div class='orgs'>
   <div class='row'>
-    <div class='col-lg-3 col-xs-12 col-sm-4 col-md-3'>
+    <div class='label-container'>
       <label>Organization:</label>
     </div>
-    <div class='col-lg-5 col-xs-12 col-sm-8 col-md-4'>
+    <div class='orgs-dropdown-container'>
       {{view Em.Select content=orgs valueBinding='org'
       optionValuePath='content.name' optionLabelPath='content.name'
-      class='form-control orgs-dropdown'}}
+      class='orgs-dropdown'}}
     </div>
   </div>
 </div>

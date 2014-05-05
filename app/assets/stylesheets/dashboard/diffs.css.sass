@@ -1,26 +1,140 @@
 #diffs-modal
-  .modal-dialog
-    width: 75%
 
   #diff-code
-    display: inline-block
-    white-space: inherit
+    font-size: 0.8em
+    min-height: 300px
 
-  #pr-comments
-    font-size: 0.85em
-    overflow-y: auto
+  .modal-main
+    @extend .modal-dialog
+    @extend .modal-lg
 
-  #new-comment
-    padding: 0px
-    textarea
-      width: 100%
+    width: 75%
 
-  .modal-title
-    margin-top: -10px
+    .close
+      position: relative
+      z-index: 2
 
-  .modal-subtitle
-    margin: 0
+    .user-avatar
+      @extend .col-lg-1
+      @extend .hidden-xs
 
-    a
-      color: #666
+      img
+        @extend .img-circle
+
+        height: 60px
+        width: 60px
+
+    .pr-title
+      @extend .col-lg-11
+
+      h4
+        @extend .modal-title
+        margin-top: -10px
+
+      h5
+        margin: 0
+
+        a
+          color: #666
+
+    .code-container
+      @extend .col-lg-9
+      @extend .col-md-8
+      @extend .col-sm-12
+      @extend .col-xs-12
+
+      #diff-code
+        display: inline-block
+        white-space: inherit
+
+    .pr-comments
+      @extend .col-lg-3
+      @extend .col-md-4
+      @extend .col-sm-12
+      @extend .col-xs-12
+      @extend .pull-right
+
+      font-size: 0.85em
+      overflow-y: auto
+
+      .merge-alert
+        @extend .alert
+        @extend .alert-danger
+
+      .comment
+        @extend .row
+        @extend .well
+        @extend .well-sm
+
+        .content
+          @extend .col-lg-10
+
+        .user-avatar
+          @extend .col-lg-2
+          @extend .hidden-xs
+          @extend .hidden-sm
+
+          img
+            @extend .img-circle
+
+            height: 40px
+            width: 40px
+
+        .new-comment-textarea
+          @extend .col-lg-9
+
+          padding: 0px
+
+          textarea
+            width: 100%
+
+        .new-comment-button
+          @extend .col-lg-3
+
+          button
+            @extend .btn
+            @extend .btn-success
+
+            span
+              @extend .glyphicon
+              @extend .glyphicon-comment
+
+
+      img
+        position: relative
+        right: 10px
+
+      .well
+        margin-bottom: 5px
+
+    .modal-footer
+      button, a
+        @extend .btn
+
+        span
+          @extend .glyphicon
+
+        &.pr-close-btn
+          @extend .btn-danger
+
+          span
+            @extend .glyphicon-trash
+
+        &.pr-merge-btn
+          @extend .btn-warning
+
+          span
+            @extend .glyphicon-flash
+
+        &.pr-lgtm-btn
+          @extend .btn-success
+
+          span
+            @extend .glyphicon-thumbs-up
+
+        &.pr-gtf-btn
+          @extend .btn-primary
+
+          span
+            @extend .glyphicon-file
 

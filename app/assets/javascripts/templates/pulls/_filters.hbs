@@ -1,16 +1,19 @@
-<div id='filters' class='col-lg-6 col-md-5 col-sm-12 col-xs-12'>
-  <div class='btn-group pull-right' data-toggle='buttons'>
-    <label class='btn btn-primary private-filter active' {{action 'applyFilter' 'private'}}>
+<div class='type-filters'>
+  <div class='buttons' data-toggle='buttons'>
+    <label class='btn private-filter active' {{action 'applyFilter' 'private'}}>
       <input type='radio'>
-      <span class='glyphicon glyphicon-lock'></span> Private <span class='badge hidden-xs'>{{privateCount}}</span>
+      <span class='icon'></span> Private 
+      <span class='badge'>{{privateCount}}</span>
     </label>
-    <label class='btn btn-primary public-filter' {{action 'applyFilter' 'public'}}>
+    <label class='btn public-filter' {{action 'applyFilter' 'public'}}>
       <input type='radio'>
-      <span class='glyphicon glyphicon-globe'></span> Public <span class='badge hidden-xs'>{{publicCount}}</span>
+      <span class='icon'></span> Public 
+      <span class='badge'>{{publicCount}}</span>
     </label>
-    <label class='btn btn-primary all-filter' {{action 'applyFilter' 'all'}}>
+    <label class='btn all-filter' {{action 'applyFilter' 'all'}}>
       <input type='radio'>
-      <span class='glyphicon glyphicon-asterisk'></span> All <span class='badge hidden-xs'>{{allCount}}</span>
+      <span class='icon'></span> All 
+      <span class='badge'>{{allCount}}</span>
     </label>
   </div>
 </div>
