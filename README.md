@@ -13,7 +13,7 @@ There is an instance of PR Dashboard running on
 ## Requirements
 
 - Ruby 2.1.1
-- Rails 4.0.4
+- Rails 4.1.1
 
 ## Github Keys
 
