@@ -1,5 +1,4 @@
 object false
-cache @pull_requests
 
 node :pulls do
   partial 'api/v1/pulls/show', object: @pull_requests
