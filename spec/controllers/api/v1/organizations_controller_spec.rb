@@ -44,4 +44,3 @@ describe Api::V1::OrganizationsController do
     end
   end
 end
-

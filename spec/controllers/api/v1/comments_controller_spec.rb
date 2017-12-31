@@ -58,4 +58,3 @@ describe Api::V1::CommentsController do
     end
   end
 end
-

@@ -6,6 +6,4 @@ class Organization
     @name   = params[:login]
     @avatar = params[:avatar_url]
   end
-
 end
-

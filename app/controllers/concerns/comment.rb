@@ -7,6 +7,4 @@ class Comment
     @username = params[:user][:login]
     @avatar   = params[:user][:avatar_url]
   end
-
 end
-

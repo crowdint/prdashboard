@@ -8,6 +8,4 @@ class Repository
     @description = params[:description]
     @private     = params[:private]
   end
-
 end
-

@@ -5,7 +5,7 @@ describe Api::V1::DiffsController do
 
   describe '#show' do
     context 'when user is signed in' do
-      let(:diff) { "le diff" }
+      let(:diff) { 'le diff' }
 
       before do
         GithubService.any_instance.stub(:diff).and_return diff
@@ -31,4 +31,3 @@ describe Api::V1::DiffsController do
     end
   end
 end
-

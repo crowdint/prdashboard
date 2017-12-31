@@ -19,4 +19,3 @@ describe DashboardController do
     end
   end
 end
-

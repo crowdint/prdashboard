@@ -20,8 +20,6 @@ module Api
       def comment_params
         params.permit(:repo, :pull, :text)
       end
-
     end
   end
 end
-
