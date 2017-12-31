@@ -12,8 +12,6 @@ module Api
       def diff_params
         params.permit(:id, :repo)
       end
-
     end
   end
 end
-

@@ -7,6 +7,4 @@ class SettingsController < ApplicationController
   def analytics_keys
     render json: ANALYTICS_KEYS, status: :ok
   end
-
 end
-

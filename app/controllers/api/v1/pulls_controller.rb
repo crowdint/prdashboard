@@ -18,7 +18,9 @@ module Api
       end
 
       def mergeable
-        render json: { mergeable: GithubService.new(session[:user_token]).pull_mergeable?(pull_params) }
+        render json: {
+          mergeable: GithubService.new(session[:user_token]).pull_mergeable?(pull_params)
+        }
       end
 
       private
@@ -38,8 +40,6 @@ module Api
       def organization
         params[:organization] || 'crowdint'
       end
-
     end
   end
 end
-

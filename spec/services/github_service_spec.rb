@@ -38,20 +38,20 @@ describe GithubService do
     let(:pulls) do
       [
         {
-          id: 13748176,
+          id: 13_748_176,
           html_url: 'https://github.com/crowdint/rails3-jquery-autocomplete/pull/264',
           number: 264,
           title: '1.0.13 broken for Mongoid, items is not an array',
           created_at: '2014-03-19T17:21:27Z',
           user: {
             login: 'danielfarrell',
-            id: 13850,
+            id: 13_850,
             avatar_url: 'https://avatars.githubusercontent.com/u/13850?',
             html_url: 'https://github.com/danielfarrell'
           },
           base: {
             repo: {
-              id: 778055,
+              id: 778_055,
               name: 'rails3-jquery-autocomplete',
               full_name: 'crowdint/rails3-jquery-autocomplete',
               private: false,
@@ -85,12 +85,12 @@ describe GithubService do
     let(:body) do
       [
         {
-          id: 12345,
+          id: 12_345,
           login: 'crowdint',
           avatar_url: 'gravatar.com/avatar.png'
         },
         {
-          id: 98765,
+          id: 98_765,
           login: 'magmaconf',
           avatar_url: 'gravatar.com/avatar.png'
         }
@@ -122,7 +122,6 @@ describe GithubService do
       expect(subject.organizations.first).to be_a Organization
     end
   end
-
 
   describe '#diff' do
     before do
@@ -209,4 +208,3 @@ describe GithubService do
     end
   end
 end
-

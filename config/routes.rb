@@ -21,4 +21,3 @@ Prdashboard::Application.routes.draw do
   get '/analytics', to: 'settings#analytics_keys'
 
 end
-

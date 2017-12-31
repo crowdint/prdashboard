@@ -8,22 +8,7 @@ class GithubService
 
   def pull_requests(organization)
     Rails.cache.fetch("#{cache_key}/#{organization}/pulls", expires_in: 5.minutes) do
-      pulls = []
-
-      repos_for(organization).each do |repo|
-        if repo.issues_count > 0
-          pull_requests = github.pull_requests.list(user: organization, repo: repo.name, auto_pagination: true)
-
-          pull_requests.each do |pull|
-            pulls << PullRequest.new(pull)
-          end
-        end
-      end
-
-      repositories = pulls.map(&:repository).uniq { |e| [e.id] }
-      users        = pulls.map(&:user).uniq { |e| [e.id] }
-
-      [pulls, repositories, users]
+      fetch_pull_requests(organization)
     end
   end
 
@@ -41,7 +26,7 @@ class GithubService
   end
 
   def diff(params)
-    Rails.cache.fetch("#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}", expires_in: 5.minutes) do
+    Rails.cache.fetch(diff_cache_key(params), expires_in: 5.minutes) do
       uri = URI("https://api.github.com/repos/#{params[:repo]}/pulls/#{params[:id]}.diff")
 
       req = Net::HTTP::Get.new(uri)
@@ -62,21 +47,18 @@ class GithubService
   end
 
   def pull_comments(params)
-    comments_list = []
     user, repo = user_repo(params)
-
-    comments = github.issues.comments.list(user, repo, issue_id: params[:pull], auto_pagination: true)
-
-    comments.each do |comment|
-      comments_list << Comment.new(comment)
-    end
-
-    comments_list
+    comments = github.issues.comments.list user,
+                                           repo,
+                                           issue_id: params[:pull],
+                                           auto_pagination: true
+    comments.each_with_object([]) { |comment, list| list << Comment.new(comment) }
   end
 
   def merge_pull_request(params, current_user)
     user, repo = user_repo(params)
-    github.pull_requests.merge user, repo, params[:id], commit_message: "Merged from PR Dashboard by #{current_user.nickname}"
+    message = "Merged from PR Dashboard by #{current_user.nickname}"
+    github.pull_requests.merge user, repo, params[:id], commit_message: message
   end
 
   def close_pull_request(params, _)
@@ -92,6 +74,10 @@ class GithubService
   end
 
   private
+
+  def diff_cache_key(params)
+    "#{cache_key}/diff/#{params[:repo]}/#{params[:id]}}"
+  end
 
   def repos_for(organization)
     repos = []
@@ -112,5 +98,19 @@ class GithubService
     [info.first, info.last]
   end
 
-end
+  def fetch_pull_requests(organization)
+    pulls = repos_for(organization).each_with_object([]) do |repo, array|
+      next unless repo.issues_count > 0
 
+      pull_requests = github.pull_requests.list user: organization,
+                                                repo: repo.name,
+                                                auto_pagination: true
+      pull_requests.each { |pull| array << PullRequest.new(pull) }
+    end
+
+    repositories = pulls.map(&:repository).uniq { |e| [e.id] }
+    users        = pulls.map(&:user).uniq { |e| [e.id] }
+
+    [pulls, repositories, users]
+  end
+end

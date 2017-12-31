@@ -7,6 +7,4 @@ class GithubUser
     @avatar   = params[:avatar_url]
     @url      = params[:html_url]
   end
-
 end
-

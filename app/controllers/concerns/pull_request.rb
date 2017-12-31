@@ -1,5 +1,6 @@
 class PullRequest
-  attr_accessor :id, :title, :url, :user, :created_at, :repository, :comments_count, :number, :is_private, :mergeable
+  attr_accessor :id, :title, :url, :user, :created_at, :repository, :comments_count, :number,
+                :is_private, :mergeable
 
   def initialize(params)
     @id             = params[:id]
@@ -13,6 +14,4 @@ class PullRequest
     @is_private     = params[:base][:repo][:private]
     @mergeable      = true
   end
-
 end
-

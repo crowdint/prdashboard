@@ -7,4 +7,3 @@ shared_context 'authentication', type: :controller do
   end
 
 end
-

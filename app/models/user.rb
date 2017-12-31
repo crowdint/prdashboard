@@ -9,6 +9,4 @@ class User < ActiveRecord::Base
       user.avatar   = auth['info']['image']
     end
   end
-
 end
-

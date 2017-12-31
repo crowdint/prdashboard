@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SessionsController do
   describe '#create' do
     before do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
       post :create
     end
 
@@ -32,4 +32,3 @@ describe SessionsController do
     end
   end
 end
-

@@ -147,4 +147,3 @@ describe Api::V1::PullsController do
   end
 
 end
-

@@ -14,8 +14,6 @@ module Api
       def organizations
         GithubService.new(session[:user_token]).organizations
       end
-
     end
   end
 end
-
